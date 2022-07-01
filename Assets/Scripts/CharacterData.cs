@@ -11,6 +11,8 @@ namespace RPG
 
         public enum LockedState { UNLOCKED, LOCKED};
 
+        public enum SelectedState { SELECTED, UNSELECTED};
+
 
 
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public static class BattleManager
 {
     public const float HERO_COUNT = 3;
-    private static Queue<RPG.CharacterData.CharacterName> HeroQueue = new Queue<RPG.CharacterData.CharacterName>();
+    public static Queue<RPG.CharacterData.CharacterName> HeroQueue = new Queue<RPG.CharacterData.CharacterName>();
 
     public static void AddToHeroQueue(RPG.CharacterData.CharacterName character)
     {
@@ -15,7 +15,6 @@ public static class BattleManager
         }
         else
         {
-            HeroQueue.Dequeue();
             HeroQueue.Enqueue(character);
         }
     }
