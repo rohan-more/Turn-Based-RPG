@@ -19,26 +19,37 @@ namespace RPG_UI
             battleButton.onClick.AddListener(StartBattle);
         }
 
+        private void OnEnable()
+        {
+            EventManager.EnableBattle.AddListener(ToggleBattleButton);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.EnableBattle.RemoveListener(ToggleBattleButton);
+        }
+
+        void ToggleBattleButton(bool enable)
+        {
+            if (enable && RPG.BattleManager.GetHeroCount() == RPG.BattleManager.HERO_COUNT)
+            {
+                battleButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                battleButton.gameObject.SetActive(false);
+            }
+        }
+
         public void StartBattle()
         {
             clicked.text = "Start Battle!";
             SelectHeroes();
         }
 
-        private void UpdateHeroQueue()
-        {
-            foreach (var item in heroList)
-            {
-                if(!BattleManager.HeroQueue.Contains(item.character))
-                {
-                    EventManager.UpdateHeros.Invoke();
-                }
-            }
-        }
-
         private void SelectHeroes()
         {
-            BattleManager.PrintHeroQueue();
+            RPG.BattleManager.PrintHeroList();
         }
 
     }

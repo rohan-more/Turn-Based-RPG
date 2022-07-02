@@ -6,44 +6,71 @@ namespace RPG_UI
 {
     public class HeroSelector : MonoBehaviour
     {
-        public RPG.CharacterData.CharacterName character;
         [SerializeField]
-        private Button selectHeroButton;
+        private RPG.HeroData heroData;
+        [SerializeField]
+        private Toggle heroToggle;
+        [SerializeField]
+        private TMPro.TMP_Text lockedText;
         [SerializeField]
         private TMPro.TMP_Text clicked;
 
+        private const string LOCKED = "LOCKED";
+        private void Start()
+        {
+            heroToggle.image.sprite = heroData.heroSprite;
+            LockHero();
+        }
+
         void OnEnable()
         {
-            selectHeroButton.onClick.AddListener(SelectHero);
-            EventManager.UpdateHeros.AddListener(UpdateQueue);
+            heroToggle.onValueChanged.AddListener(ToggleHero);
         }
         void OnDisable()
         {
-            selectHeroButton.onClick.RemoveListener(SelectHero);
-            EventManager.UpdateHeros.RemoveListener(UpdateQueue);
+            heroToggle.onValueChanged.RemoveListener(ToggleHero);
         }
 
-        public void SelectHero()
+        void LockHero()
         {
-            selectHeroButton.image.color = Color.green;
-            if (BattleManager.GetHeroCount() < BattleManager.HERO_COUNT)
+            if (heroData.isLocked == RPG.CharacterData.LockedState.LOCKED)
             {
-                BattleManager.AddToHeroQueue(character);
+                heroToggle.interactable = false;
+                lockedText.text = LOCKED;
+            }
+        }
+        void UnlockHero()
+        {
+            if (heroData.isLocked == RPG.CharacterData.LockedState.UNLOCKED)
+            {
+                heroToggle.interactable = true;
+                lockedText.text = string.Empty;
+            }
+        }
+        public void ToggleHero(bool isSelected)
+        {
+            if (isSelected)
+            {
+                if (RPG.BattleManager.GetHeroCount() < RPG.BattleManager.HERO_COUNT)
+                {
+                    RPG.BattleManager.AddToHeroList(heroData.heroName);
+                    heroToggle.image.color = Color.green;
+                }
             }
             else
             {
-                BattleManager.RemoveFromHeroQueue();
-                BattleManager.AddToHeroQueue(character);
-                EventManager.UpdateHeros.Invoke();
+                RPG.BattleManager.RemoveFromHeroList(heroData.heroName);
+                heroToggle.image.color = Color.white;
+
             }
 
-        }
-
-        public void UpdateQueue()
-        {
-            if (!BattleManager.HeroQueue.Contains(character))
+            if (RPG.BattleManager.GetHeroCount() == RPG.BattleManager.HERO_COUNT)
             {
-                selectHeroButton.image.color = Color.white;
+                EventManager.EnableBattle?.Invoke(true);
+            }
+            else if (RPG.BattleManager.GetHeroCount() < RPG.BattleManager.HERO_COUNT)
+            {
+                EventManager.EnableBattle?.Invoke(false);
             }
         }
     }

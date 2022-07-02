@@ -2,40 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class BattleManager
+namespace RPG
 {
-    public const float HERO_COUNT = 3;
-    public static Queue<RPG.CharacterData.CharacterName> HeroQueue = new Queue<RPG.CharacterData.CharacterName>();
-
-    public static void AddToHeroQueue(RPG.CharacterData.CharacterName character)
+    public static class BattleManager
     {
-        if (HeroQueue.Count < HERO_COUNT && !HeroQueue.Contains(character))
+        public const float HERO_COUNT = 3;
+        private static List<RPG.CharacterData.CharacterName> HeroList = new List<RPG.CharacterData.CharacterName>();
+
+        #region Helper Functions
+
+        public static void AddToHeroList(RPG.CharacterData.CharacterName character)
         {
-            HeroQueue.Enqueue(character);
+            if (!HeroList.Contains(character))
+            {
+                HeroList.Add(character);
+            }
         }
-        else
+
+        public static void RemoveFromHeroList(RPG.CharacterData.CharacterName character)
         {
-            HeroQueue.Enqueue(character);
+            if (HeroList.Contains(character))
+            {
+                HeroList.Remove(character);
+            }
         }
-    }
 
-    public static void RemoveFromHeroQueue()
-    {
-        HeroQueue.Dequeue();
-    }
-
-    public static int GetHeroCount()
-    {
-        return HeroQueue.Count;
-    }
-
-    public static void PrintHeroQueue()
-    {
-        foreach (var item in HeroQueue)
+        public static int GetHeroCount()
         {
-            Debug.Log(item);
+            return HeroList.Count;
         }
+
+        public static bool IsHeroInList(RPG.CharacterData.CharacterName name)
+        {
+            return HeroList.Contains(name);
+        }
+
+        public static void PrintHeroList()
+        {
+            foreach (var item in HeroList)
+            {
+                Debug.Log(item);
+            }
+        }
+        #endregion
+
+
     }
-
-
 }
+
