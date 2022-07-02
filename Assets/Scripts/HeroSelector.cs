@@ -4,28 +4,23 @@ using UnityEngine.EventSystems;
 
 namespace RPG_UI
 {
-    public class HeroSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class HeroSelector : MonoBehaviour
     {
         public RPG.CharacterData.CharacterName character;
         [SerializeField]
         private Button selectHeroButton;
         [SerializeField]
         private TMPro.TMP_Text clicked;
-        public bool isSelected;
-
-        private bool isPointerDown;
-        float pointerDownTimer;
-        float holdTime = 1.3f;
 
         void OnEnable()
         {
             selectHeroButton.onClick.AddListener(SelectHero);
-            EventManager.UpdateHeros.AddListener(UpdateSelection);
+            EventManager.UpdateHeros.AddListener(UpdateQueue);
         }
         void OnDisable()
         {
             selectHeroButton.onClick.RemoveListener(SelectHero);
-            EventManager.UpdateHeros.RemoveListener(UpdateSelection);
+            EventManager.UpdateHeros.RemoveListener(UpdateQueue);
         }
 
         public void SelectHero()
@@ -44,37 +39,11 @@ namespace RPG_UI
 
         }
 
-        public void UpdateSelection()
+        public void UpdateQueue()
         {
             if (!BattleManager.HeroQueue.Contains(character))
             {
                 selectHeroButton.image.color = Color.white;
-            }
-        }
-
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            isPointerDown = true;
-            //Debug.Log(this.gameObject.name + " held down");
-        }
-
-        public void OnPointerUp(PointerEventData eventData)
-        {
-            isPointerDown = false;
-            //Debug.Log(this.gameObject.name + " left");
-        }
-
-        private void Update()
-        {
-            if(isPointerDown)
-            {
-                pointerDownTimer += Time.deltaTime;
-                if (pointerDownTimer >= holdTime)
-                {
-                    isPointerDown = false;
-                    pointerDownTimer = 0;
-                    clicked.text = character + " held down";
-                }
             }
         }
     }

@@ -31,7 +31,7 @@ namespace RPG_UI
             {
                 if(!BattleManager.HeroQueue.Contains(item.character))
                 {
-                    item.UpdateSelection();
+                    EventManager.UpdateHeros.Invoke();
                 }
             }
         }
