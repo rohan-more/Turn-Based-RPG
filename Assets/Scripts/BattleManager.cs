@@ -9,7 +9,13 @@ namespace RPG
         public const float HERO_COUNT = 3;
         private static List<RPG.CharacterData.CharacterName> HeroList = new List<RPG.CharacterData.CharacterName>();
 
+
         #region Helper Functions
+
+        public static List<RPG.CharacterData.CharacterName> GetHeroList()
+        {
+            return HeroList;
+        }
 
         public static void AddToHeroList(RPG.CharacterData.CharacterName character)
         {

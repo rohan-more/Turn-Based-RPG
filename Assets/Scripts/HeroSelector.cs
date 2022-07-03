@@ -11,14 +11,21 @@ namespace RPG_UI
         [SerializeField]
         private Toggle heroToggle;
         [SerializeField]
+        private LoadHeroStats heroStats;
+        [SerializeField]
+        private HeroImageButton heroButton;
+        [SerializeField]
         private TMPro.TMP_Text lockedText;
         [SerializeField]
-        private TMPro.TMP_Text clicked;
+        private Image lockedIcon;
 
-        private const string LOCKED = "LOCKED";
+private const string LOCKED = "LOCKED";
         private void Start()
         {
             heroToggle.image.sprite = heroData.heroSprite;
+            lockedText.text = heroData.heroName.ToString();
+            heroStats.heroData = heroData;
+            heroButton.character = heroData.heroName;
             LockHero();
         }
 
@@ -36,7 +43,7 @@ namespace RPG_UI
             if (heroData.isLocked == RPG.CharacterData.LockedState.LOCKED)
             {
                 heroToggle.interactable = false;
-                lockedText.text = LOCKED;
+                lockedIcon.gameObject.SetActive(true);
             }
         }
         void UnlockHero()
@@ -44,7 +51,7 @@ namespace RPG_UI
             if (heroData.isLocked == RPG.CharacterData.LockedState.UNLOCKED)
             {
                 heroToggle.interactable = true;
-                lockedText.text = string.Empty;
+                lockedIcon.gameObject.SetActive(false);
             }
         }
         public void ToggleHero(bool isSelected)
@@ -61,7 +68,6 @@ namespace RPG_UI
             {
                 RPG.BattleManager.RemoveFromHeroList(heroData.heroName);
                 heroToggle.image.color = Color.white;
-
             }
 
             if (RPG.BattleManager.GetHeroCount() == RPG.BattleManager.HERO_COUNT)

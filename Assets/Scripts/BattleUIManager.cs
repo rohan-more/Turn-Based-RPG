@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 namespace RPG_UI
 {
     public class BattleUIManager : MonoBehaviour
     {
         [SerializeField]
-        private List<HeroSelector> heroList;
-        [SerializeField]
         private Button battleButton;
-        [SerializeField]
-        private TMPro.TMP_Text clicked;
+        private const string BattleScene = "Battle";
         void Start()
         {
             battleButton.onClick.AddListener(StartBattle);
@@ -43,15 +40,10 @@ namespace RPG_UI
 
         public void StartBattle()
         {
-            clicked.text = "Start Battle!";
-            SelectHeroes();
+            this.gameObject.SetActive(false);
+            GameDataManager.Instance.SelectedHeroes = RPG.BattleManager.GetHeroList();
+            SceneManager.LoadScene(BattleScene, LoadSceneMode.Additive);
         }
-
-        private void SelectHeroes()
-        {
-            RPG.BattleManager.PrintHeroList();
-        }
-
     }
 }
 

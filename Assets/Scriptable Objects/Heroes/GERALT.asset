@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: GERALT
   m_EditorClassIdentifier: 
   heroName: 3
-  isLocked: 1
+  isLocked: 0
   isSelected: 0
   maxHealth: 100
-  attackPower: 5
-  level: 1
+  attackPower: 25
+  level: 4
+  xP: 0
   heroSprite: {fileID: 21300000, guid: 5fad9e77a5ebb47f1bc12dd39f31c708, type: 3}

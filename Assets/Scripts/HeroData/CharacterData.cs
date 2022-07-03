@@ -7,7 +7,7 @@ namespace RPG
     public class CharacterData
     {
         public enum CharacterName { LAMBERT, VESEMIR, ESKEL, GERALT, YENNEFER, TRISS, CIRI, KEIRA, SHANI,
-        EREDIN};
+        ZOLTAN};
 
         public enum LockedState { UNLOCKED, LOCKED};
 

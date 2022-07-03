@@ -5,20 +5,23 @@ using UnityEngine.UI;
 
 public class HeroController : MonoBehaviour
 {
+    public RPG.HeroData heroData;
     [SerializeField]
-    private RPG.HeroData heroData;
+    private Image heroImage;
+    public HeroSaveData saveData;
     [SerializeField]
-    private Image heroImage; 
-
-[SerializeField]
     private RPG_UI.DamageController damageController;
     [SerializeField]
     private HeroImageButton heroImageController;
 
-    // Start is called before the first frame update
     void Start()
     {
         heroImageController.character = heroData.heroName;
         heroImage.sprite = heroData.heroSprite;
+        LoadPopupData();
+    }
+    private void LoadPopupData()
+    {
+        EventManager.DisplayHeroStats.Invoke(saveData);
     }
 }

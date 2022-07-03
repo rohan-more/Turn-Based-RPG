@@ -14,12 +14,17 @@ public class FillHeroStats : MonoBehaviour
     [SerializeField]
     private TMPro.TMP_Text attackPowerText;
 
-    public void UpdateStats(RPG.HeroData heroData)
+    public void UpdateSavedStats(HeroSaveData heroData)
     {
-        heroImage.sprite = heroData.heroSprite;
         nameText.text = heroData.heroName.ToString();
         levelText.text = heroData.level.ToString();
         attackPowerText.text = heroData.attackPower.ToString();
+    }
+
+
+    public void UpdateImage(RPG.HeroData heroData)
+    {
+        heroImage.sprite = heroData.heroSprite;
     }
 
 }

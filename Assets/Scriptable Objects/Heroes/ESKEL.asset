@@ -17,5 +17,6 @@ MonoBehaviour:
   isSelected: 0
   maxHealth: 100
   attackPower: 20
-  level: 1
+  level: 3
+  xP: 0
   heroSprite: {fileID: 21300000, guid: 9f07e6b69780a48a3af73cab3e667ea1, type: 3}

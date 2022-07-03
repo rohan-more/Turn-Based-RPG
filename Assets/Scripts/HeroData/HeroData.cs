@@ -13,6 +13,7 @@ namespace RPG
         public float maxHealth;
         public float attackPower;
         public int level;
+        public int xP;
         public Sprite heroSprite;
     }
 }
