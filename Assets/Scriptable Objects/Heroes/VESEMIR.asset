@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e07ef9b81858c34196d513e84d61d2b, type: 3}
-  m_Name: HERO4
+  m_Name: VESEMIR
   m_EditorClassIdentifier: 
-  heroName: 3
-  isLocked: 1
+  heroName: 1
+  isLocked: 0
   isSelected: 0
   maxHealth: 100
-  attackPower: 5
+  attackPower: 15
   level: 1
-  heroSprite: {fileID: 21300000, guid: 5fad9e77a5ebb47f1bc12dd39f31c708, type: 3}
+  heroSprite: {fileID: 21300000, guid: d1285aeacf6be4d91b959f649fe8f290, type: 3}

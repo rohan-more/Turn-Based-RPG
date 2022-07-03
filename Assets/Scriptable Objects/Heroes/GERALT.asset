@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e07ef9b81858c34196d513e84d61d2b, type: 3}
-  m_Name: HERO3
+  m_Name: GERALT
   m_EditorClassIdentifier: 
-  heroName: 2
-  isLocked: 0
+  heroName: 3
+  isLocked: 1
   isSelected: 0
   maxHealth: 100
-  attackPower: 20
+  attackPower: 5
   level: 1
-  heroSprite: {fileID: 21300000, guid: 9f07e6b69780a48a3af73cab3e667ea1, type: 3}
+  heroSprite: {fileID: 21300000, guid: 5fad9e77a5ebb47f1bc12dd39f31c708, type: 3}

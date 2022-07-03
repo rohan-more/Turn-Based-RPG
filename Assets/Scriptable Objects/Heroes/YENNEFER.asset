@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e07ef9b81858c34196d513e84d61d2b, type: 3}
-  m_Name: HERO2
+  m_Name: YENNEFER
   m_EditorClassIdentifier: 
-  heroName: 1
-  isLocked: 0
+  heroName: 4
+  isLocked: 1
   isSelected: 0
   maxHealth: 100
   attackPower: 15
   level: 1
-  heroSprite: {fileID: 21300000, guid: d1285aeacf6be4d91b959f649fe8f290, type: 3}
+  heroSprite: {fileID: 21300000, guid: 67c5edeb7d31343a98f0768b395ca3d1, type: 3}

@@ -9,6 +9,7 @@ public class HeroImageButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private bool isPointerDown;
     private float pointerDownTimer;
     private const float HOLD_TIME = 1.3f;
+
     public void OnPointerDown(PointerEventData eventData)
     {
         isPointerDown = true;
