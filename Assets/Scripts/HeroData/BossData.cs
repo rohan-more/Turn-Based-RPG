@@ -1,0 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace RPG
+{
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/BossData", order = 1)]
+    public class BossData : ScriptableObject
+    {
+        public CharacterData.Boss bossName;
+        public float maxHealth;
+        public float attackPower;
+        public int level;
+        public int xP;
+        public Sprite sprite;
+    }
+}

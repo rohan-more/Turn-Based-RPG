@@ -9,9 +9,17 @@ namespace RPG
         public enum CharacterName { LAMBERT, VESEMIR, ESKEL, GERALT, YENNEFER, TRISS, CIRI, KEIRA, SHANI,
         ZOLTAN};
 
+        public enum Boss
+        {
+            IMLERITH, EREDIN, RADOVID_V, DETLAFF, GAUNTER_O_DIMM, CARETAKER, OLGIERD, VILGEFORTZ, ORIANNA,
+            UNSEEN_ELDER
+        };
+
         public enum LockedState { UNLOCKED, LOCKED};
 
         public enum SelectedState { UNSELECTED, SELECTED};
+
+
 
         public float maxHealth;
         public float currentHealth;
@@ -19,6 +27,11 @@ namespace RPG
         public int level;
         public float experiencePoints;
 
+    }
+
+    public class BattleData
+    {
+        public enum BattleState { SELECT_HERO, ATTACK_BOSS, CHOOSE_HERO_TO_ATTACK, ATTACK_HERO}
     }
 }
 
