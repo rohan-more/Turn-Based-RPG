@@ -42,7 +42,7 @@ namespace RPG_UI
         {
             this.gameObject.SetActive(false);
             GameDataManager.Instance.SelectedHeroes = RPG.BattleManager.GetHeroList();
-            SceneManager.LoadScene(BattleScene, LoadSceneMode.Additive);
+            SceneManager.LoadScene(BattleScene, LoadSceneMode.Single);
         }
     }
 }

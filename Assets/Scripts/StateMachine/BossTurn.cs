@@ -8,7 +8,7 @@ namespace RPG.StateMachine
         public BattleState stateName = BattleState.BOSS_TURN;
         public override IEnumerator Attack(BattleArenaManager battleManager, int damage)
         {
-            Debug.Log(battleManager.selectedBoss.bossData.name + " is attacking " + battleManager.attackedHero.heroData.name);
+            //Debug.Log(battleManager.selectedBoss.bossData.name + " is attacking " + battleManager.attackedHero.heroData.name);
             battleManager.attackedHero.DoDamage(damage);
             if (battleManager.attackedHero.currentHealth <= 0)
             {

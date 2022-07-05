@@ -29,8 +29,11 @@ public class BattleArenaManager : StateMachine
     public BossController selectedBoss;
     [HideInInspector]
     public HeroController attackedHero;
+    [HideInInspector]
     public HeroController attackingHero;
     #endregion
+
+    public RPG_UI.ResultsPopupManager popupManager;
 
     void Awake()
     {
@@ -39,9 +42,9 @@ public class BattleArenaManager : StateMachine
         heroControllers.Add(hero3);
 
         // ------------- Temp allocation - NEEDS TO BE REMOVED ------------//
-        GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.LAMBERT);
+/*        GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.LAMBERT);
         GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.ESKEL);
-        GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.VESEMIR);
+        GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.VESEMIR);*/
         foreach (var item in GameDataManager.Instance.SelectedHeroes)
         {
             heroSaveData.Add(SaveSystem.LoadHeroSaveFile(item.ToString()));
@@ -64,6 +67,7 @@ public class BattleArenaManager : StateMachine
         hero1Toggle.onValueChanged.AddListener(AttackBoss);
         hero2Toggle.onValueChanged.AddListener(AttackBoss);
         hero3Toggle.onValueChanged.AddListener(AttackBoss);
+        EventManager.SwitchToLobby.AddListener(DeactivateBattleUI);
     }
 
     private void OnDisable()
@@ -71,8 +75,14 @@ public class BattleArenaManager : StateMachine
         hero1Toggle.onValueChanged.RemoveListener(AttackBoss);
         hero2Toggle.onValueChanged.RemoveListener(AttackBoss);
         hero3Toggle.onValueChanged.RemoveListener(AttackBoss);
+        EventManager.SwitchToLobby.RemoveListener(DeactivateBattleUI);
     }
 
+
+    public void DeactivateBattleUI()
+    {
+        this.gameObject.SetActive(false);
+    }
     /// <summary>
     /// Player attacking boss
     /// </summary>
@@ -123,10 +133,12 @@ public class BattleArenaManager : StateMachine
         if(hasWon)
         {
             StartCoroutine(currentState.Win(this));
+            StartCoroutine(popupManager.BattleState(true));
         }
         else
         {
             StartCoroutine(currentState.Lose(this));
+            StartCoroutine(popupManager.BattleState(false));
         }
     }
 
