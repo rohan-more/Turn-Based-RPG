@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
+    public RPG.BossData bossData;
     [SerializeField]
     private RPG_UI.DamageController damageController;
     [SerializeField]
     private RPG_UI.HealthBarController healthBarController;
     public int currentHealth;
-    [SerializeField]
-    public int attackPower = 20;
     void Start()
     {
-        currentHealth = healthBarController.GetMaxHealth();
+        currentHealth = bossData.maxHealth;
+        healthBarController.SetMaxHealth(bossData.maxHealth);
     }
 
     public void DoDamage(int damage)

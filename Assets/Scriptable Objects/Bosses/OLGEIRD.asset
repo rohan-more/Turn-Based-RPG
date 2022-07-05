@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ef8f89c6fed5994196cb5f518c06674, type: 3}
-  m_Name: IMLERITH
+  m_Name: OLGEIRD
   m_EditorClassIdentifier: 
-  bossName: 0
+  bossName: 6
   maxHealth: 100
-  attackPower: 10
-  level: 1
+  attackPower: 20
+  level: 3
   xP: 100
   sprite: {fileID: 0}

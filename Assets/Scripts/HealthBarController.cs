@@ -38,9 +38,7 @@ namespace RPG_UI
             {
                 slider.value = 0;
             }
-
         }
-
     }
 }
 

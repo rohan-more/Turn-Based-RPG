@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RADOVID_V
   m_EditorClassIdentifier: 
   bossName: 2
-  maxHealth: 300
+  maxHealth: 100
   attackPower: 15
   level: 1
   xP: 100

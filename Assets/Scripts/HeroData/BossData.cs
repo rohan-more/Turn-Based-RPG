@@ -8,8 +8,8 @@ namespace RPG
     public class BossData : ScriptableObject
     {
         public CharacterData.Boss bossName;
-        public float maxHealth;
-        public float attackPower;
+        public int maxHealth;
+        public int attackPower;
         public int level;
         public int xP;
         public Sprite sprite;

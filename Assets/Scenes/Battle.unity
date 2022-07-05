@@ -701,14 +701,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7b6ad16c51e71d049a263903ae1c50a6, type: 2}
   - {fileID: 11400000, guid: 0ae8df6d534c0634ebf14bcf398f341e, type: 2}
   - {fileID: 11400000, guid: 6d10eb1004452524db76150bbb3012d7, type: 2}
+  bossDataList:
+  - {fileID: 11400000, guid: 43b57c9e6bc7e4d48a72a186ae48e414, type: 2}
+  - {fileID: 11400000, guid: 2d22e84f7c35a7e4b8a468aedc7f47c1, type: 2}
+  - {fileID: 11400000, guid: 0b9d9c37810e40f4c90c5d8597080e07, type: 2}
   hero1: {fileID: 590647161}
   hero2: {fileID: 1032478243}
   hero3: {fileID: 1721617484}
   hero1Toggle: {fileID: 823357334}
   hero2Toggle: {fileID: 1032478246}
   hero3Toggle: {fileID: 1721617487}
-  boss: {fileID: 279897535326893253}
-  selectedHero: {fileID: 0}
+  selectedBoss: {fileID: 279897535326893253}
+  attackedHero: {fileID: 0}
+  attackingHero: {fileID: 0}
 --- !u!224 &1203484346 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5428279947579820144, guid: 8ac16c49aa9811e4791bd737a5777456, type: 3}
@@ -798,7 +803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1620944515
 RectTransform:
   m_ObjectHideFlags: 0

@@ -9,8 +9,14 @@ public class BattleArenaManager : StateMachine
     State currentState;
     public PlayerTurn PlayerTurnState = new PlayerTurn();
     public BossTurn BossTurnState = new BossTurn();
+    public PlayerDead PlayerDeadState = new PlayerDead();
+    public PlayerWon PlayerWinState = new PlayerWon();
+    public PlayerLost PlayerLoseState = new PlayerLost();
+
     [SerializeField]
     private List<RPG.HeroData> heroDataList;
+    [SerializeField]
+    private List<RPG.BossData> bossDataList;
     #region UI Elements
     private List<HeroController> heroControllers = new List<HeroController>();
     private List<HeroSaveData> heroSaveData = new List<HeroSaveData>();
@@ -20,9 +26,10 @@ public class BattleArenaManager : StateMachine
     public Toggle hero1Toggle;
     public Toggle hero2Toggle;
     public Toggle hero3Toggle;
-    public BossController boss;
+    public BossController selectedBoss;
     [HideInInspector]
-    public HeroController selectedHero;
+    public HeroController attackedHero;
+    public HeroController attackingHero;
     #endregion
 
     void Awake()
@@ -35,7 +42,6 @@ public class BattleArenaManager : StateMachine
         GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.LAMBERT);
         GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.ESKEL);
         GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.VESEMIR);
-
         foreach (var item in GameDataManager.Instance.SelectedHeroes)
         {
             heroSaveData.Add(SaveSystem.LoadHeroSaveFile(item.ToString()));
@@ -46,6 +52,11 @@ public class BattleArenaManager : StateMachine
             heroControllers[i].saveData = heroSaveData[i];
             heroControllers[i].heroData = GetHeroData(GameDataManager.Instance.GetEnumFromString(heroSaveData[i].heroName));
         }
+    }
+
+    private void Start()
+    {
+        selectedBoss.bossData = bossDataList[0];
     }
 
     private void OnEnable()
@@ -62,22 +73,76 @@ public class BattleArenaManager : StateMachine
         hero3Toggle.onValueChanged.RemoveListener(AttackBoss);
     }
 
+    /// <summary>
+    /// Player attacking boss
+    /// </summary>
+    /// <param name="value"></param>
     private void AttackBoss(bool value)
     {
         if (value)
         {
             //Debug.Log("Begin");
             ChangeStateTo(PlayerTurnState);
-            selectedHero = heroControllers[Random.Range(0, heroControllers.Count)];
-            StartCoroutine(currentState.Attack(this, selectedHero.saveData.attackPower));
-            StartCoroutine(currentState.Attack(this, boss.attackPower));
-            hero1Toggle.isOn = hero2Toggle.isOn = hero3Toggle.isOn = false;
+
+            if(hero1Toggle.isOn)
+            {
+                attackingHero = hero1;
+            }
+            else if(hero2Toggle.isOn)
+            {
+                attackingHero = hero2;
+            }
+            else
+            {
+                attackingHero = hero3;
+            }
+            StartCoroutine(currentState.Attack(this, attackingHero.saveData.attackPower));
+
+            foreach (var item in heroControllers)
+            {
+                item.heroToggle.isOn = item.heroToggle.interactable = false;
+            }
+        }
+    }
+    public void AttackPlayer()
+    {
+        attackedHero = heroControllers[Random.Range(0, heroControllers.Count)];
+        StartCoroutine(currentState.Attack(this, selectedBoss.bossData.attackPower));
+    }
+
+    public void ActivateHeroes()
+    {
+        foreach (var item in heroControllers)
+        {
+            item.heroToggle.interactable = true;
         }
     }
 
-    public void AttackPlayer()
+    public void HasPlayerWon(bool hasWon)
     {
-        StartCoroutine(currentState.Attack(this, boss.attackPower));
+        if(hasWon)
+        {
+            StartCoroutine(currentState.Win(this));
+        }
+        else
+        {
+            StartCoroutine(currentState.Lose(this));
+        }
+    }
+
+    public void HeroDeath()
+    {
+        StartCoroutine(currentState.Death(this));
+        if (heroControllers.Count > 0)
+        {
+            heroControllers.Remove(attackedHero);
+        }
+
+        if (heroControllers.Count == 0)
+        {
+            ChangeStateTo(PlayerLoseState);
+            HasPlayerWon(false);
+        }
     }
 
     public void ChangeStateTo(State newState)
