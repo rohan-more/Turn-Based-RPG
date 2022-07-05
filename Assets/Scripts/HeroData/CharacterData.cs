@@ -28,10 +28,5 @@ namespace RPG
         public float experiencePoints;
 
     }
-
-    public class BattleData
-    {
-        public enum BattleState { SELECT_HERO, ATTACK_BOSS, CHOOSE_HERO_TO_ATTACK, ATTACK_HERO}
-    }
 }
 

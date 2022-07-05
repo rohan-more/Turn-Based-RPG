@@ -15,16 +15,29 @@ public class HeroController : MonoBehaviour
     private RPG_UI.DamageController damageController;
     [SerializeField]
     private HeroImageButton heroImageController;
+    [SerializeField]
+    private RPG_UI.HealthBarController healthBarController;
+    public int currentHealth;
+    [SerializeField]
+    private Toggle heroToggle;
 
     void Start()
     {
         heroImageController.character = heroData.heroName;
         nameText.text = heroData.heroName.ToString();
         heroImage.sprite = heroData.heroSprite;
+        currentHealth = healthBarController.GetMaxHealth();
         LoadPopupData();
+    }
+
+    public void DoDamage(int damage)
+    {
+        damageController.DealDamage(damage);
+        currentHealth = healthBarController.GetCurrentHealth();
     }
     private void LoadPopupData()
     {
         EventManager.DisplayHeroStats.Invoke(saveData);
     }
+
 }

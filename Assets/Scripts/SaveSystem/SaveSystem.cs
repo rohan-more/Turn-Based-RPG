@@ -47,6 +47,10 @@ public static class SaveSystem
             HeroSaveData heroData = JsonConvert.DeserializeObject<HeroSaveData>(json);
             return heroData;
         }
+        else
+        {
+            Debug.LogError(path + " not found!");
+        }
         return null;
     }
 

@@ -10,8 +10,8 @@ namespace RPG
         public CharacterData.CharacterName heroName;
         public CharacterData.LockedState isLocked;
         public CharacterData.SelectedState isSelected;
-        public float maxHealth;
-        public float attackPower;
+        public int maxHealth;
+        public int attackPower;
         public int level;
         public int xP;
         public Sprite heroSprite;

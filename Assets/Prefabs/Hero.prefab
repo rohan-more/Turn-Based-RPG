@@ -429,8 +429,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.019607844, g: 1, b: 0, a: 1}
+    m_PressedColor: {r: 0.019607844, g: 1, b: 0, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -478,6 +478,9 @@ MonoBehaviour:
     xP: 0
   damageController: {fileID: 5428279947579820145}
   heroImageController: {fileID: 5947750040660303417}
+  healthBarController: {fileID: 5428279947344825652}
+  currentHealth: 0
+  heroToggle: {fileID: 5359843327311877667}
 --- !u!114 &5428279947579820145
 MonoBehaviour:
   m_ObjectHideFlags: 0

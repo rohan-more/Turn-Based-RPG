@@ -20,10 +20,25 @@ namespace RPG_UI
             slider.maxValue = health;
             slider.value = health;
         }
-
+        public int GetCurrentHealth()
+        {
+            return (int)slider.value;
+        }
+        public int GetMaxHealth()
+        {
+            return (int)slider.maxValue;
+        }
         public void Damage(int value)
         {
-            slider.value -= value;
+            if (slider.value > value)
+            {
+                slider.value -= value;
+            }
+            else
+            {
+                slider.value = 0;
+            }
+
         }
 
     }

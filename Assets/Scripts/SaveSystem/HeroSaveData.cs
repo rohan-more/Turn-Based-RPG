@@ -8,7 +8,7 @@ public class HeroSaveData
     public string heroName;
     public string isUnlocked;
     public string isSelected;
-    public float attackPower;
+    public int attackPower;
     public int level;
     public int xP;
     public HeroSaveData()
