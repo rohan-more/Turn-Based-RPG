@@ -20,6 +20,7 @@ public sealed class GameDataManager
 
     public Dictionary<RPG.CharacterData.CharacterName,HeroSaveData> heroDict = new Dictionary<RPG.CharacterData.CharacterName, HeroSaveData>();
     public List<RPG.CharacterData.CharacterName> SelectedHeroes = new List<RPG.CharacterData.CharacterName>();
+    public Dictionary<RPG.CharacterData.CharacterName, bool> HeroLockStatus = new Dictionary<RPG.CharacterData.CharacterName, bool>();
 
     public RPG.CharacterData.CharacterName GetEnumFromString(string name)
     {

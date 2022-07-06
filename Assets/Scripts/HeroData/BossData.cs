@@ -12,6 +12,5 @@ namespace RPG
         public int attackPower;
         public int level;
         public int xP;
-        public Sprite sprite;
     }
 }

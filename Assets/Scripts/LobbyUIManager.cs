@@ -6,24 +6,53 @@ using UnityEngine.SceneManagement;
 
 namespace RPG_UI
 {
-    public class BattleUIManager : MonoBehaviour
+    public class LobbyUIManager : MonoBehaviour
     {
         [SerializeField]
         private Button battleButton;
         private const string BattleScene = "Battle";
+        public List<RPG.HeroData> heroDataList;
+        public List<HeroSelector> heroUIList;
+
         void Start()
         {
-            battleButton.onClick.AddListener(StartBattle);
+            foreach (var item in heroUIList)
+            {
+                HeroUnlockManager.CheckHeroStatus(item);
+            }
+
+            HeroUnlockManager.GetBattleCount();
+            if (HeroUnlockManager.GetBattleCount() % HeroUnlockManager.UNLOCK_HERO_COUNT == 0)
+            {
+                foreach (var item in heroUIList)
+                {
+                    if (item.LOCKEDSTATE == RPG.CharacterData.LockedState.LOCKED)
+                    {
+                        Debug.Log("Unlocking " + item.heroData.name);
+                        UnlockHero(item);
+                        return;
+                    }
+                }
+            }
+
         }
 
         private void OnEnable()
         {
             EventManager.EnableBattle.AddListener(ToggleBattleButton);
+            battleButton.onClick.AddListener(StartBattle);
         }
 
         private void OnDisable()
         {
             EventManager.EnableBattle.RemoveListener(ToggleBattleButton);
+            battleButton.onClick.RemoveListener(StartBattle);
+        }
+
+        public static void UnlockHero(RPG_UI.HeroSelector item)
+        {
+           SaveSystem.LoadHeroSaveFile(item.heroData);
+            item.UnlockHero();
         }
 
         void ToggleBattleButton(bool enable)

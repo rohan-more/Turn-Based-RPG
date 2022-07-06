@@ -32,6 +32,12 @@ void Start()
         LoadPopupData();
     }
 
+    public void GiveXP(int xp)
+    {
+        heroData.xP = xp;
+        SaveSystem.ReadSaveFile(heroData);
+    }
+
     public void DoDamage(int damage)
     {
         damageController.DealDamage(damage);

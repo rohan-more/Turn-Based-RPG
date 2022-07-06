@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LAMBERT
   m_EditorClassIdentifier: 
   heroName: 0
-  isLocked: 0
+  isLocked: 1
   isSelected: 0
   maxHealth: 100
   attackPower: 10

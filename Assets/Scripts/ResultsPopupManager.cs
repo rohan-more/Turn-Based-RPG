@@ -33,6 +33,7 @@ namespace RPG_UI
         void BackToLobby()
         {
             EventManager.SwitchToLobby.Invoke();
+            HeroUnlockManager.UpdateBattleCount();
             SceneManager.LoadScene(LobbyScene, LoadSceneMode.Single);
         }
 

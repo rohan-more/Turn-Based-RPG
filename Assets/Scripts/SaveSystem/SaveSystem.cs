@@ -25,6 +25,20 @@ public static class SaveSystem
         File.WriteAllText(path, json);
     }
 
+    public static void LoadHeroSaveFile(RPG.HeroData heroData)
+    {
+        string path = SAVE_FOLDER_PATH + heroData.heroName + ".json";
+        if (File.Exists(path))
+        {
+            if (heroData.isLocked == RPG.CharacterData.LockedState.LOCKED)
+            {
+                heroData.isLocked = RPG.CharacterData.LockedState.UNLOCKED;
+            }
+            HeroSaveData saveData = new HeroSaveData(heroData);
+            string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
+            File.WriteAllText(path, json);
+        }
+    }
     public static void LoadSaveFile(string name)
     {
         string path = SAVE_FOLDER_PATH + name + ".json";

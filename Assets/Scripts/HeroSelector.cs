@@ -6,8 +6,7 @@ namespace RPG_UI
 {
     public class HeroSelector : MonoBehaviour
     {
-        [SerializeField]
-        private RPG.HeroData heroData;
+        public RPG.HeroData heroData;
         [SerializeField]
         private Toggle heroToggle;
         [SerializeField]
@@ -18,15 +17,19 @@ namespace RPG_UI
         private TMPro.TMP_Text lockedText;
         [SerializeField]
         private Image lockedIcon;
+        public RPG.CharacterData.LockedState LOCKEDSTATE;
 
-private const string LOCKED = "LOCKED";
+        private void Awake()
+        {
+            heroToggle.interactable = false;
+            lockedIcon.gameObject.SetActive(true);
+        }
         private void Start()
         {
             heroToggle.image.sprite = heroData.heroSprite;
             lockedText.text = heroData.heroName.ToString();
             heroStats.heroData = heroData;
             heroButton.character = heroData.heroName;
-            LockHero();
         }
 
         void OnEnable()
@@ -38,21 +41,17 @@ private const string LOCKED = "LOCKED";
             heroToggle.onValueChanged.RemoveListener(ToggleHero);
         }
 
-        void LockHero()
+        public void LockHero()
         {
-            if (heroData.isLocked == RPG.CharacterData.LockedState.LOCKED)
-            {
-                heroToggle.interactable = false;
-                lockedIcon.gameObject.SetActive(true);
-            }
+            LOCKEDSTATE = RPG.CharacterData.LockedState.LOCKED;
+            heroToggle.interactable = false;
+            lockedIcon.gameObject.SetActive(true);
         }
-        void UnlockHero()
+        public void UnlockHero()
         {
-            if (heroData.isLocked == RPG.CharacterData.LockedState.UNLOCKED)
-            {
-                heroToggle.interactable = true;
-                lockedIcon.gameObject.SetActive(false);
-            }
+            LOCKEDSTATE = RPG.CharacterData.LockedState.UNLOCKED;
+            heroToggle.interactable = true;
+            lockedIcon.gameObject.SetActive(false);
         }
         public void ToggleHero(bool isSelected)
         {

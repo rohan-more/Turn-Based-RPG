@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
+    [HideInInspector]
     public RPG.BossData bossData;
     [SerializeField]
     private RPG_UI.DamageController damageController;

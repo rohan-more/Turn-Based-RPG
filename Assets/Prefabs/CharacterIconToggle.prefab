@@ -283,6 +283,7 @@ MonoBehaviour:
   heroButton: {fileID: 7159699961045263274}
   lockedText: {fileID: 1243387867934013183}
   lockedIcon: {fileID: 7341409274586311417}
+  LOCKEDSTATE: 0
 --- !u!114 &-1822561306628345898
 MonoBehaviour:
   m_ObjectHideFlags: 0

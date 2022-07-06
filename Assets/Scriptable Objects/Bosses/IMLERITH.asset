@@ -17,4 +17,3 @@ MonoBehaviour:
   attackPower: 10
   level: 1
   xP: 100
-  sprite: {fileID: 0}
