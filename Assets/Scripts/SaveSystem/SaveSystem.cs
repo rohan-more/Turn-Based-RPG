@@ -7,6 +7,18 @@ using System.IO;
 public static class SaveSystem
 {
     private static readonly string SAVE_FOLDER_PATH = Application.persistentDataPath + "/SaveData/";
+    private static void WriteTextToFile(string path, string json)
+    {
+        File.WriteAllText(path, json);
+    }
+
+    private static HeroSaveData DeserializeHeroData(string path)
+    {
+        using StreamReader r = new StreamReader(path);
+        string json = r.ReadToEnd();
+        HeroSaveData heroData = JsonConvert.DeserializeObject<HeroSaveData>(json);
+        return heroData;
+    }
 
     public static void CreateSaveFile(RPG.HeroData heroData)
     {
@@ -22,7 +34,7 @@ public static class SaveSystem
 
         HeroSaveData saveData = new HeroSaveData(heroData);
         string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
-        File.WriteAllText(path, json);
+        WriteTextToFile(path, json);
     }
 
     public static void LoadHeroSaveFile(RPG.HeroData heroData)
@@ -36,7 +48,7 @@ public static class SaveSystem
             }
             HeroSaveData saveData = new HeroSaveData(heroData);
             string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
-            File.WriteAllText(path, json);
+            WriteTextToFile(path, json);
         }
     }
     public static void LoadSaveFile(string name)
@@ -44,10 +56,7 @@ public static class SaveSystem
         string path = SAVE_FOLDER_PATH + name + ".json";
         if (File.Exists(path) && !GameDataManager.Instance.heroDict.ContainsKey(GetEnumFromString(name)))
         {
-            using StreamReader r = new StreamReader(path);
-            string json = r.ReadToEnd();
-            HeroSaveData heroData = JsonConvert.DeserializeObject<HeroSaveData>(json);
-            GameDataManager.Instance.heroDict.Add(GetEnumFromString(name), heroData);
+            GameDataManager.Instance.heroDict.Add(GetEnumFromString(name), DeserializeHeroData(path));
         }
     }
 
@@ -56,10 +65,7 @@ public static class SaveSystem
         string path = SAVE_FOLDER_PATH + name + ".json";
         if (File.Exists(path))
         {
-            using StreamReader r = new StreamReader(path);
-            string json = r.ReadToEnd();
-            HeroSaveData heroData = JsonConvert.DeserializeObject<HeroSaveData>(json);
-            return heroData;
+            return DeserializeHeroData(path);
         }
         else
         {
@@ -98,6 +104,7 @@ public static class SaveSystem
         }
         return null;
     }
+
 
     private static RPG.CharacterData.CharacterName GetEnumFromString(string name)
     {

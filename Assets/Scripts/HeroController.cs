@@ -18,6 +18,7 @@ public class HeroController : MonoBehaviour
     private HeroImageButton heroImageController;
     [SerializeField]
     private RPG_UI.HealthBarController healthBarController;
+    [HideInInspector]
     public int currentHealth;
     public Toggle heroToggle;
     [SerializeField]

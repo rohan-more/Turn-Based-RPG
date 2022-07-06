@@ -12,6 +12,8 @@ public class FillHeroStats : MonoBehaviour
     [SerializeField]
     private TMPro.TMP_Text levelText;
     [SerializeField]
+    private TMPro.TMP_Text xpText;
+    [SerializeField]
     private TMPro.TMP_Text attackPowerText;
 
     public void UpdateSavedStats(HeroSaveData heroData)
@@ -19,6 +21,7 @@ public class FillHeroStats : MonoBehaviour
         nameText.text = heroData.heroName.ToString();
         levelText.text = heroData.level.ToString();
         attackPowerText.text = heroData.attackPower.ToString();
+        xpText.text = heroData.xP.ToString();
     }
 
 

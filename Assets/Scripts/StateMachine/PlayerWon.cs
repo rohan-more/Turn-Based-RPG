@@ -10,9 +10,7 @@ namespace RPG.StateMachine
 
         public override IEnumerator Win(BattleArenaManager battleManager)
         {
-            Debug.Log("PLAYER WIN");
             yield return new WaitForSeconds(1.0f);
-
         }
     }
 

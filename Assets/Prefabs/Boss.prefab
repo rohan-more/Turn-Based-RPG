@@ -354,6 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossData: {fileID: 0}
+  nameText: {fileID: 374228283343176650}
   damageController: {fileID: 6271949578370157077}
   healthBarController: {fileID: 6271949579141795664}
   currentHealth: 0

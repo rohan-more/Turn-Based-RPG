@@ -10,7 +10,5 @@ namespace RPG
         public CharacterData.Boss bossName;
         public int maxHealth;
         public int attackPower;
-        public int level;
-        public int xP;
     }
 }
