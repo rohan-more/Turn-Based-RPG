@@ -22,20 +22,16 @@ public class HeroController : MonoBehaviour
     public Toggle heroToggle;
     [SerializeField]
     private Image deadOverlay;
-void Start()
+    public RPG.CharacterData.CharacterName heroName;
+    void Start()
     {
         heroImageController.character = heroData.heroName;
+        heroName = heroData.heroName;
         nameText.text = heroData.heroName.ToString();
         heroImage.sprite = heroData.heroSprite;
         currentHealth = healthBarController.GetMaxHealth();
         healthBarController.SetMaxHealth(heroData.maxHealth);
         LoadPopupData();
-    }
-
-    public void GiveXP(int xp)
-    {
-        heroData.xP = xp;
-        SaveSystem.ReadSaveFile(heroData);
     }
 
     public void DoDamage(int damage)

@@ -705,6 +705,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43b57c9e6bc7e4d48a72a186ae48e414, type: 2}
   - {fileID: 11400000, guid: 2d22e84f7c35a7e4b8a468aedc7f47c1, type: 2}
   - {fileID: 11400000, guid: 0b9d9c37810e40f4c90c5d8597080e07, type: 2}
+  - {fileID: 11400000, guid: 3da507304a1f9034eab40995b03cee6d, type: 2}
   hero1: {fileID: 590647161}
   hero2: {fileID: 1032478243}
   hero3: {fileID: 1721617484}
@@ -1118,6 +1119,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2103388843}
     m_Modifications:
+    - target: {fileID: 106248752988559403, guid: db13eea87e011fa4aa572ac4353ba0f3, type: 3}
+      propertyPath: heroControllers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 106248752988559403, guid: db13eea87e011fa4aa572ac4353ba0f3, type: 3}
+      propertyPath: heroControllers.Array.data[0]
+      value: 
+      objectReference: {fileID: 590647161}
+    - target: {fileID: 106248752988559403, guid: db13eea87e011fa4aa572ac4353ba0f3, type: 3}
+      propertyPath: heroControllers.Array.data[1]
+      value: 
+      objectReference: {fileID: 1032478243}
+    - target: {fileID: 106248752988559403, guid: db13eea87e011fa4aa572ac4353ba0f3, type: 3}
+      propertyPath: heroControllers.Array.data[2]
+      value: 
+      objectReference: {fileID: 1721617484}
     - target: {fileID: 676672476014268490, guid: db13eea87e011fa4aa572ac4353ba0f3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

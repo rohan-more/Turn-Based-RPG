@@ -10,9 +10,19 @@ namespace RPG_UI
     {
         [SerializeField]
         private Button battleButton;
+        [SerializeField]
+        private Button exitButton;
         private const string BattleScene = "Battle";
         public List<RPG.HeroData> heroDataList;
         public List<HeroSelector> heroUIList;
+
+        private void Awake()
+        {
+            foreach (var item in heroDataList)
+            {
+                SaveSystem.CreateSaveFile(item);
+            }
+        }
 
         void Start()
         {
@@ -21,7 +31,6 @@ namespace RPG_UI
                 HeroUnlockManager.CheckHeroStatus(item);
             }
 
-            HeroUnlockManager.GetBattleCount();
             if (HeroUnlockManager.GetBattleCount() % HeroUnlockManager.UNLOCK_HERO_COUNT == 0)
             {
                 foreach (var item in heroUIList)
@@ -37,21 +46,28 @@ namespace RPG_UI
 
         }
 
+        private void ExitApplication()
+        {
+            Application.Quit();
+        }
+
         private void OnEnable()
         {
             EventManager.EnableBattle.AddListener(ToggleBattleButton);
+            exitButton.onClick.AddListener(ExitApplication);
             battleButton.onClick.AddListener(StartBattle);
         }
 
         private void OnDisable()
         {
             EventManager.EnableBattle.RemoveListener(ToggleBattleButton);
+            exitButton.onClick.RemoveListener(ExitApplication);
             battleButton.onClick.RemoveListener(StartBattle);
         }
 
         public static void UnlockHero(RPG_UI.HeroSelector item)
         {
-           SaveSystem.LoadHeroSaveFile(item.heroData);
+            SaveSystem.LoadHeroSaveFile(item.heroData);
             item.UnlockHero();
         }
 

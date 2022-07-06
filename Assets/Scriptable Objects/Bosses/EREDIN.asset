@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e07ef9b81858c34196d513e84d61d2b, type: 3}
-  m_Name: VESEMIR
+  m_Script: {fileID: 11500000, guid: 9ef8f89c6fed5994196cb5f518c06674, type: 3}
+  m_Name: EREDIN
   m_EditorClassIdentifier: 
-  heroName: 1
-  isLocked: 0
-  isSelected: 0
-  maxHealth: 100
-  attackPower: 12
+  bossName: 1
+  maxHealth: 300
+  attackPower: 25
   level: 1
-  xP: 0
-  heroSprite: {fileID: 21300000, guid: d1285aeacf6be4d91b959f649fe8f290, type: 3}
+  xP: 300

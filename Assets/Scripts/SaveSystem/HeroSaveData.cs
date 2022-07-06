@@ -11,6 +11,7 @@ public class HeroSaveData
     public int attackPower;
     public int level;
     public int xP;
+    public int health;
     public HeroSaveData()
     {
 
@@ -24,6 +25,7 @@ public class HeroSaveData
         this.attackPower = heroData.attackPower;
         this.level = heroData.level;
         this.xP = heroData.xP;
+        this.health = heroData.maxHealth;
     }
 }
 

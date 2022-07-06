@@ -7,6 +7,7 @@ public static class HeroUnlockManager
     public static int totalBattleCount;
     public static int heroesUnlockCount;
     public const int UNLOCK_HERO_COUNT = 5;
+    public const int LEVEL_UP_COUNT = 5;
 
     public static void GetHeroUnlockedCount()
     {
