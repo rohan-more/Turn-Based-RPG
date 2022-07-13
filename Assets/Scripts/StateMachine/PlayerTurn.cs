@@ -6,10 +6,10 @@ namespace RPG.StateMachine
     public class PlayerTurn : State
     {
         public BattleState stateName = BattleState.PLAYER_TURN;
-        public override IEnumerator Attack(BattleArenaManager battleManager, int damage)
+        public override IEnumerator Attack(BattleStateManager battleManager, int damage)
         {
-            battleManager.selectedBoss.DoDamage(damage);
-            if (battleManager.selectedBoss.currentHealth <= 0)
+            battleManager.boss.DoDamage(damage);
+            if (battleManager.boss.currentHealth <= 0)
             {
                 battleManager.ChangeStateTo(battleManager.PlayerWinState);
                 battleManager.HasPlayerWon(true);

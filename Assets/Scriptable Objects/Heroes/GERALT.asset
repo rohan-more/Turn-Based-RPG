@@ -15,7 +15,7 @@ MonoBehaviour:
   heroName: 3
   isLocked: 1
   isSelected: 0
-  maxHealth: 100
+  maxHealth: 200
   attackPower: 25
   level: 2
   xP: 0

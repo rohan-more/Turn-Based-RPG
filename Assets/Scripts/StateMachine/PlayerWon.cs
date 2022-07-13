@@ -8,7 +8,7 @@ namespace RPG.StateMachine
     {
         public BattleState stateName = BattleState.WIN;
 
-        public override IEnumerator Win(BattleArenaManager battleManager)
+        public override IEnumerator Win(BattleStateManager battleManager)
         {
             yield return new WaitForSeconds(1.0f);
         }

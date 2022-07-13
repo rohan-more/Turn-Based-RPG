@@ -6,15 +6,6 @@ using RPG.StateMachine;
 
 public class BattleArenaManager : StateMachine
 {
-    #region State Functions
-    State currentState;
-    public PlayerTurn PlayerTurnState = new PlayerTurn();
-    public BossTurn BossTurnState = new BossTurn();
-    public PlayerDead PlayerDeadState = new PlayerDead();
-    public PlayerWon PlayerWinState = new PlayerWon();
-    public PlayerLost PlayerLoseState = new PlayerLost();
-    #endregion
-
     [SerializeField]
     private List<RPG.HeroData> heroDataList;
     [SerializeField]
@@ -36,6 +27,8 @@ public class BattleArenaManager : StateMachine
     #endregion
     private bool isPointerHeldDown;
     public RPG_UI.ResultsPopupManager popupManager;
+    [SerializeField] 
+    private BattleStateManager stateManager;
 
     void Awake()
     {
@@ -51,17 +44,28 @@ public class BattleArenaManager : StateMachine
             heroSaveData.Add(SaveSystem.LoadHeroSaveFile(item.ToString()));
         }
 
+/*        GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.LAMBERT);
+        GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.ESKEL);
+        GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.VESEMIR);*/
+
         for (int i = 0; i < heroSaveData.Count; i++)
         {
             heroControllers[i].saveData = heroSaveData[i];
             heroControllers[i].heroData = GetHeroData(GameDataManager.Instance.GetEnumFromString(heroSaveData[i].heroName));
         }
         selectedBoss.bossData = bossDataList[Random.Range(0, bossDataList.Count)];
+        stateManager.boss = selectedBoss;
+    }
+
+    private void Start()
+    {
+        stateManager.AwaitingPlayerInput();
     }
 
     private void OnEnable()
     {
         EventManager.IsPointerHeldDown.AddListener(LoadPopupData);
+        EventManager.EnableHeroToggles.AddListener(ActivateHeroes);
         hero1Toggle.onValueChanged.AddListener(AttackBoss);
         hero2Toggle.onValueChanged.AddListener(AttackBoss);
         hero3Toggle.onValueChanged.AddListener(AttackBoss);
@@ -69,7 +73,8 @@ public class BattleArenaManager : StateMachine
 
     private void OnDisable()
     {
-        EventManager.IsPointerHeldDown.AddListener(LoadPopupData);
+        EventManager.IsPointerHeldDown.RemoveListener(LoadPopupData);
+        EventManager.EnableHeroToggles.RemoveListener(ActivateHeroes);
         hero1Toggle.onValueChanged.RemoveListener(AttackBoss);
         hero2Toggle.onValueChanged.RemoveListener(AttackBoss);
         hero3Toggle.onValueChanged.RemoveListener(AttackBoss);
@@ -80,18 +85,10 @@ public class BattleArenaManager : StateMachine
         isPointerHeldDown = value;
     }
 
-    #region StateMachine Functions
-    /// <summary>
-    /// Player attacking boss
-    /// </summary>
-    /// <param name="value"></param>
     private void AttackBoss(bool value)
     {
         if (value && !isPointerHeldDown)
         {
-            //Debug.Log("Begin");
-            ChangeStateTo(PlayerTurnState);
-
             if (hero1Toggle.isOn)
             {
                 attackingHero = hero1;
@@ -104,48 +101,23 @@ public class BattleArenaManager : StateMachine
             {
                 attackingHero = hero3;
             }
-            StartCoroutine(currentState.Attack(this, attackingHero.saveData.attackPower));
-
+            stateManager.attackingHero = attackingHero;
+            stateManager.AttackBoss();
             foreach (var item in heroControllers)
             {
                 item.heroToggle.isOn = item.heroToggle.interactable = false;
             }
+            stateManager.attackedHero = heroControllers[Random.Range(0, heroControllers.Count)];
         }
         isPointerHeldDown = false;
-    }
 
-    /// <summary>
-    /// Boss attacks player
-    /// </summary>
-    /// <param name="value"></param>
-    public void AttackPlayer()
-    {
-        attackedHero = heroControllers[Random.Range(0, heroControllers.Count)];
-        StartCoroutine(currentState.Attack(this, selectedBoss.bossData.attackPower));
     }
-
-    /// <summary>
-    /// Set heroes active after boss's turn
-    /// </summary>
-    /// <param name="value"></param>
-    public void ActivateHeroes()
-    {
-        foreach (var item in heroControllers)
-        {
-            item.heroToggle.interactable = true;
-        }
-    }
-
-    /// <summary>
-    /// Has player won?
-    /// </summary>
-    /// <param name="value"></param>
 
     public void HasPlayerWon(bool hasWon)
     {
+        stateManager.HasPlayerWon(hasWon);
         if (hasWon)
         {
-            StartCoroutine(currentState.Win(this));
             foreach (var item in heroControllers)
             {
                 ScoreManager.UpdateStats(item.heroName);
@@ -155,37 +127,34 @@ public class BattleArenaManager : StateMachine
         }
         else
         {
-            StartCoroutine(currentState.Lose(this));
             StartCoroutine(popupManager.BattleState(false));
         }
         HeroUnlockManager.UpdateBattleCount();
     }
 
-    /// <summary>
-    /// Is hero dead?
-    /// </summary>
-    /// <param name="value"></param>
-
     public void HeroDeath()
     {
-        StartCoroutine(currentState.Death(this));
         if (heroControllers.Count > 0)
         {
+            stateManager.HeroDeath();
             heroControllers.Remove(attackedHero);
         }
 
         if (heroControllers.Count == 0)
         {
-            ChangeStateTo(PlayerLoseState);
+            stateManager.SetHeroDeathState();
             HasPlayerWon(false);
         }
     }
 
-    public void ChangeStateTo(State newState)
+    public void ActivateHeroes()
     {
-        currentState = newState;
+        foreach (var item in heroControllers)
+        {
+            item.heroToggle.interactable = true;
+        }
     }
-    #endregion
+
 
     private RPG.HeroData GetHeroData(RPG.CharacterData.CharacterName heroName)
     {
