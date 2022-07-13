@@ -32,7 +32,7 @@ public class HeroController : MonoBehaviour
         heroImage.sprite = heroData.heroSprite;
         currentHealth = healthBarController.GetMaxHealth();
         healthBarController.SetMaxHealth(heroData.maxHealth);
-        LoadPopupData();
+        //LoadPopupData();
     }
 
     public void DoDamage(int damage)

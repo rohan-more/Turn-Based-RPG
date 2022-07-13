@@ -9,7 +9,12 @@ public class HeroImageButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private bool isPointerDown;
     private float pointerDownTimer;
     private const float HOLD_TIME = 1.3f;
+    HeroSaveData heroData;
 
+    private void Awake()
+    {
+        SaveSystem.LoadSaveFile(character.ToString());
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
         isPointerDown = true;
@@ -28,7 +33,6 @@ public class HeroImageButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             {
                 isPointerDown = false;
                 pointerDownTimer = 0;
-                HeroSaveData heroData;
                 GameDataManager.Instance.heroDict.TryGetValue(character, out heroData);
                 EventManager.GetHeroImage.Invoke(character);
                 EventManager.IsPointerHeldDown.Invoke(!isPointerDown);

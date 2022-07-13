@@ -7,6 +7,8 @@ using RPG.StateMachine;
 public class BattleArenaManager : StateMachine
 {
     [SerializeField]
+    private bool isDebugMode;
+    [SerializeField]
     private List<RPG.HeroData> heroDataList;
     [SerializeField]
     private List<RPG.BossData> bossDataList;
@@ -27,7 +29,7 @@ public class BattleArenaManager : StateMachine
     #endregion
     private bool isPointerHeldDown;
     public RPG_UI.ResultsPopupManager popupManager;
-    [SerializeField] 
+    [SerializeField]
     private BattleStateManager stateManager;
 
     void Awake()
@@ -44,9 +46,12 @@ public class BattleArenaManager : StateMachine
             heroSaveData.Add(SaveSystem.LoadHeroSaveFile(item.ToString()));
         }
 
-/*        GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.LAMBERT);
-        GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.ESKEL);
-        GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.VESEMIR);*/
+        if(isDebugMode)
+        {
+            GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.LAMBERT);
+            GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.ESKEL);
+            GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.VESEMIR);
+        }
 
         for (int i = 0; i < heroSaveData.Count; i++)
         {
