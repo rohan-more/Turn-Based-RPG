@@ -720,6 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bf643433824a44d8eb69d88a1672c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebugMode: 0
   heroDataList:
   - {fileID: 11400000, guid: 869633ab00f5baf438f4409fea0af0b2, type: 2}
   - {fileID: 11400000, guid: 5e86c64097fcc874c837a895960f758f, type: 2}

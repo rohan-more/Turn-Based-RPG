@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 1243387869312035473}
   - component: {fileID: 588027119242403946}
   - component: {fileID: 8714343556509461316}
-  - component: {fileID: -1822561306628345898}
   - component: {fileID: 7159699961045263274}
   m_Layer: 5
   m_Name: CharacterIconToggle
@@ -279,24 +278,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: 869633ab00f5baf438f4409fea0af0b2, type: 2}
   heroToggle: {fileID: 588027119242403946}
-  heroStats: {fileID: -1822561306628345898}
+  heroStats: {fileID: 0}
   heroButton: {fileID: 7159699961045263274}
   lockedText: {fileID: 1243387867934013183}
   lockedIcon: {fileID: 7341409274586311417}
   LOCKEDSTATE: 0
---- !u!114 &-1822561306628345898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243387869312035477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f768c9891327df246bda117e9b9d4d00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heroData: {fileID: 11400000, guid: 869633ab00f5baf438f4409fea0af0b2, type: 2}
 --- !u!114 &7159699961045263274
 MonoBehaviour:
   m_ObjectHideFlags: 0

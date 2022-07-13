@@ -17,14 +17,12 @@ namespace RPG_UI
         private void OnEnable()
         {
             EventManager.DisplayHeroStats.AddListener(LoadPopupData);
-            //EventManager.GetHeroImage.AddListener(LoadHeroImage);
             closeButton.onClick.AddListener(ClosePopup);
         }
 
         private void OnDisable()
         {
             EventManager.DisplayHeroStats.RemoveListener(LoadPopupData);
-            //EventManager.GetHeroImage.RemoveListener(LoadHeroImage);
             closeButton.onClick.RemoveListener(ClosePopup);
         }
 
@@ -39,7 +37,6 @@ namespace RPG_UI
             LoadHeroImage(heroData.heroName);
         }
 
-
         void LoadHeroImage(string characterName)
         {
             statPanel.SetActive(true);
@@ -52,19 +49,5 @@ namespace RPG_UI
                 }
             }
         }
-
-        void LoadHeroImage(RPG.CharacterData.CharacterName characterName)
-        {
-            statPanel.SetActive(true);
-            foreach (var item in heroList)
-            {
-                if (item.heroName == characterName)
-                {
-                    heroStats.UpdateImage(item);
-                    return;
-                }
-            }
-        }
-
     }
 }

@@ -32,7 +32,6 @@ public class HeroController : MonoBehaviour
         heroImage.sprite = heroData.heroSprite;
         currentHealth = healthBarController.GetMaxHealth();
         healthBarController.SetMaxHealth(heroData.maxHealth);
-        //LoadPopupData();
     }
 
     public void DoDamage(int damage)
@@ -46,10 +45,4 @@ public class HeroController : MonoBehaviour
         deadOverlay.gameObject.SetActive(true);
         heroToggle.interactable = false;
     }
-
-    private void LoadPopupData()
-    {
-        EventManager.DisplayHeroStats.Invoke(saveData);
-    }
-
 }

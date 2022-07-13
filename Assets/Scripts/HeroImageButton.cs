@@ -34,7 +34,6 @@ public class HeroImageButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 isPointerDown = false;
                 pointerDownTimer = 0;
                 GameDataManager.Instance.heroDict.TryGetValue(character, out heroData);
-                EventManager.GetHeroImage.Invoke(character);
                 EventManager.IsPointerHeldDown.Invoke(!isPointerDown);
                 EventManager.DisplayHeroStats.Invoke(heroData);
             }
