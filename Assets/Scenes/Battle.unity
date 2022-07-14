@@ -721,28 +721,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebugMode: 0
-  heroDataList:
-  - {fileID: 11400000, guid: 869633ab00f5baf438f4409fea0af0b2, type: 2}
-  - {fileID: 11400000, guid: 5e86c64097fcc874c837a895960f758f, type: 2}
-  - {fileID: 11400000, guid: 7b6ad16c51e71d049a263903ae1c50a6, type: 2}
-  - {fileID: 11400000, guid: 0ae8df6d534c0634ebf14bcf398f341e, type: 2}
-  - {fileID: 11400000, guid: 6d10eb1004452524db76150bbb3012d7, type: 2}
-  - {fileID: 11400000, guid: df50d7b774c1efe49a002ff6afa97bf1, type: 2}
-  - {fileID: 11400000, guid: c371ac186c907a149adda4fcd02c3846, type: 2}
-  - {fileID: 11400000, guid: 73a9f22d68453494983088eb3e6b74d7, type: 2}
-  - {fileID: 11400000, guid: 6f04b79376be41449b31378d2e7b7b4e, type: 2}
-  - {fileID: 11400000, guid: 44f0add1e9bf0bc48953230d08302186, type: 2}
-  bossDataList:
-  - {fileID: 11400000, guid: cd0a5f2fa1d47524e9fcb912ed347849, type: 2}
-  - {fileID: 11400000, guid: 2d22e84f7c35a7e4b8a468aedc7f47c1, type: 2}
-  - {fileID: 11400000, guid: 0b9d9c37810e40f4c90c5d8597080e07, type: 2}
-  - {fileID: 11400000, guid: 03b758b796d6fe240945b75282d807e0, type: 2}
-  - {fileID: 11400000, guid: f679266b848ff7a4ab58da98bb7dbfe3, type: 2}
-  - {fileID: 11400000, guid: 3da507304a1f9034eab40995b03cee6d, type: 2}
-  - {fileID: 11400000, guid: edcae4cee68f6f84db74a30f02c0927c, type: 2}
-  - {fileID: 11400000, guid: 2d22e84f7c35a7e4b8a468aedc7f47c1, type: 2}
-  - {fileID: 11400000, guid: 809f7ea062ae6e54cb5c201bd0bc5477, type: 2}
-  - {fileID: 11400000, guid: 9e4fa10da3632404bb6dd0084f9ba54a, type: 2}
+  heroDataList: {fileID: 11400000, guid: 50682ce5573cb694aaf6eab31a34eccc, type: 2}
+  bossDataList: {fileID: 11400000, guid: 1a3333516cc22304c9d6b4b29ea20804, type: 2}
   hero1: {fileID: 590647161}
   hero2: {fileID: 1032478243}
   hero3: {fileID: 1721617484}
@@ -917,6 +897,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7218429150245186778, guid: 1c66aa831a4a1a84d9e119f45de4c5f3, type: 3}
+      propertyPath: heroDataList
+      value: 
+      objectReference: {fileID: 11400000, guid: 50682ce5573cb694aaf6eab31a34eccc, type: 2}
     - target: {fileID: 8837960450861873733, guid: 1c66aa831a4a1a84d9e119f45de4c5f3, type: 3}
       propertyPath: m_IsActive
       value: 0

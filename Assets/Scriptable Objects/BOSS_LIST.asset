@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bb9b35cdc1224429e1621a9401705f, type: 3}
+  m_Name: BOSS_LIST
+  m_EditorClassIdentifier: 
+  all:
+  - {fileID: 11400000, guid: 3da507304a1f9034eab40995b03cee6d, type: 2}
+  - {fileID: 11400000, guid: f679266b848ff7a4ab58da98bb7dbfe3, type: 2}
+  - {fileID: 11400000, guid: 03b758b796d6fe240945b75282d807e0, type: 2}
+  - {fileID: 11400000, guid: 43b57c9e6bc7e4d48a72a186ae48e414, type: 2}
+  - {fileID: 11400000, guid: 0b9d9c37810e40f4c90c5d8597080e07, type: 2}
+  - {fileID: 11400000, guid: edcae4cee68f6f84db74a30f02c0927c, type: 2}
+  - {fileID: 11400000, guid: 2d22e84f7c35a7e4b8a468aedc7f47c1, type: 2}
+  - {fileID: 11400000, guid: 809f7ea062ae6e54cb5c201bd0bc5477, type: 2}
+  - {fileID: 11400000, guid: cd0a5f2fa1d47524e9fcb912ed347849, type: 2}
+  - {fileID: 11400000, guid: 9e4fa10da3632404bb6dd0084f9ba54a, type: 2}

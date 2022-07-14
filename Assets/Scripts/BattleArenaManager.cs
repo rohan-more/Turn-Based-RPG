@@ -9,9 +9,10 @@ public class BattleArenaManager : StateMachine
     [SerializeField]
     private bool isDebugMode;
     [SerializeField]
-    private List<RPG.HeroData> heroDataList;
+    private RPG.HeroList heroDataList;
+
     [SerializeField]
-    private List<RPG.BossData> bossDataList;
+    private RPG.BossList bossDataList;
     #region UI Elements
     private List<HeroController> heroControllers = new List<HeroController>();
     private List<HeroSaveData> heroSaveData = new List<HeroSaveData>();
@@ -46,7 +47,7 @@ public class BattleArenaManager : StateMachine
             heroSaveData.Add(SaveSystem.LoadHeroSaveFile(item.ToString()));
         }
 
-        if(isDebugMode)
+        if (isDebugMode)
         {
             GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.LAMBERT);
             GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.ESKEL);
@@ -58,7 +59,7 @@ public class BattleArenaManager : StateMachine
             heroControllers[i].saveData = heroSaveData[i];
             heroControllers[i].heroData = GetHeroData(GameDataManager.Instance.GetEnumFromString(heroSaveData[i].heroName));
         }
-        selectedBoss.bossData = bossDataList[Random.Range(0, bossDataList.Count)];
+        selectedBoss.bossData = bossDataList.All[Random.Range(0, bossDataList.All.Count)];
         stateManager.boss = selectedBoss;
     }
 
@@ -163,7 +164,7 @@ public class BattleArenaManager : StateMachine
 
     private RPG.HeroData GetHeroData(RPG.CharacterData.CharacterName heroName)
     {
-        foreach (var item in heroDataList)
+        foreach (var item in heroDataList.All)
         {
             if (item.heroName == heroName)
             {

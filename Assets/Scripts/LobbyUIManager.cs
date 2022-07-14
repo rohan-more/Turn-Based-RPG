@@ -13,12 +13,14 @@ namespace RPG_UI
         [SerializeField]
         private Button exitButton;
         private const string BattleScene = "Battle";
-        public List<RPG.HeroData> heroDataList;
-        public List<HeroSelector> heroUIList;
+        public RPG.HeroList heroDataList;
+        private List<HeroSelector> heroUIList = new List<HeroSelector>();
+        public Transform heroesParent;
+        public GameObject heroPrefab;
 
         private void Awake()
         {
-            foreach (var item in heroDataList)
+            foreach (var item in heroDataList.All)
             {
                 SaveSystem.CreateSaveFile(item);
             }
@@ -26,6 +28,8 @@ namespace RPG_UI
 
         void Start()
         {
+            CreateHeroToggles();
+
             foreach (var item in heroUIList)
             {
                 HeroUnlockManager.CheckHeroStatus(item);
@@ -37,11 +41,24 @@ namespace RPG_UI
                 {
                     if (item.LOCKEDSTATE == RPG.CharacterData.LockedState.LOCKED)
                     {
-                        Debug.Log("Unlocking " + item.heroData.name);
                         UnlockHero(item);
                         return;
                     }
                 }
+            }
+
+        }
+
+        private void CreateHeroToggles()
+        {
+            for (int i = 0; i < heroDataList.All.Count; i++)
+            {
+                GameObject heroTogglePrefab = Instantiate(heroPrefab, heroesParent);
+
+                HeroSelector hero = heroTogglePrefab.GetComponent<HeroSelector>();
+                hero.heroData = heroDataList.All[i];
+                heroTogglePrefab.transform.name = hero.heroData.name;
+                heroUIList.Add(hero);
             }
 
         }

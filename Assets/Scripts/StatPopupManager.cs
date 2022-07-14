@@ -7,7 +7,8 @@ namespace RPG_UI
 {
     public class StatPopupManager : MonoBehaviour
     {
-        public List<RPG.HeroData> heroList;
+        [SerializeField]
+        private RPG.HeroList heroDataList;
         public GameObject statPanel;
         [SerializeField]
         private Button closeButton;
@@ -40,7 +41,7 @@ namespace RPG_UI
         void LoadHeroImage(string characterName)
         {
             statPanel.SetActive(true);
-            foreach (var item in heroList)
+            foreach (var item in heroDataList.All)
             {
                 if (item.heroName.ToString() == characterName)
                 {

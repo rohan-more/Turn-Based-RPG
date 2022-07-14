@@ -9,12 +9,18 @@ public class HeroImageButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private bool isPointerDown;
     private float pointerDownTimer;
     private const float HOLD_TIME = 1.3f;
-    HeroSaveData heroData;
+    public HeroSaveData heroData;
 
-    private void Awake()
+    public void GetHeroData(RPG.CharacterData.CharacterName name)
     {
-        SaveSystem.LoadSaveFile(character.ToString());
+        character = name;
+        if (!string.IsNullOrEmpty(character.ToString()))
+        {
+            SaveSystem.LoadSaveFile(character.ToString());
+            GameDataManager.Instance.heroDict.TryGetValue(character, out heroData);
+        }
     }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         isPointerDown = true;
@@ -32,10 +38,12 @@ public class HeroImageButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             if (pointerDownTimer >= HOLD_TIME)
             {
                 isPointerDown = false;
-                pointerDownTimer = 0;
-                GameDataManager.Instance.heroDict.TryGetValue(character, out heroData);
+                pointerDownTimer = 0;                
                 EventManager.IsPointerHeldDown.Invoke(!isPointerDown);
-                EventManager.DisplayHeroStats.Invoke(heroData);
+                if(heroData != null)
+                {
+                    EventManager.DisplayHeroStats.Invoke(heroData);
+                }
             }
         }
     }

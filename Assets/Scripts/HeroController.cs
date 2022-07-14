@@ -26,7 +26,7 @@ public class HeroController : MonoBehaviour
     public RPG.CharacterData.CharacterName heroName;
     void Start()
     {
-        heroImageController.character = heroData.heroName;
+        heroImageController.GetHeroData(heroData.heroName);
         heroName = heroData.heroName;
         nameText.text = heroData.heroName.ToString();
         heroImage.sprite = heroData.heroSprite;

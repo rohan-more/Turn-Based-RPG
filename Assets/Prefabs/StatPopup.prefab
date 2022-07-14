@@ -865,12 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126a4cac357d4df4f817e6af137ea0ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroList:
-  - {fileID: 11400000, guid: 869633ab00f5baf438f4409fea0af0b2, type: 2}
-  - {fileID: 11400000, guid: 5e86c64097fcc874c837a895960f758f, type: 2}
-  - {fileID: 11400000, guid: 7b6ad16c51e71d049a263903ae1c50a6, type: 2}
-  - {fileID: 11400000, guid: 0ae8df6d534c0634ebf14bcf398f341e, type: 2}
-  - {fileID: 11400000, guid: 6d10eb1004452524db76150bbb3012d7, type: 2}
+  heroDataList: {fileID: 11400000, guid: 50682ce5573cb694aaf6eab31a34eccc, type: 2}
   statPanel: {fileID: 8837960450861873733}
   closeButton: {fileID: 951493668033054492}
   heroStats: {fileID: 2462365867532686500}

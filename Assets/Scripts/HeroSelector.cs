@@ -24,9 +24,13 @@ namespace RPG_UI
         }
         private void Start()
         {
-            heroToggle.image.sprite = heroData.heroSprite;
-            lockedText.text = heroData.heroName.ToString();
-            heroButton.character = heroData.heroName;
+            if(heroData != null)
+            {
+                heroToggle.image.sprite = heroData.heroSprite;
+                lockedText.text = heroData.heroName.ToString();
+                heroButton.GetHeroData(heroData.heroName);
+            }
+
         }
 
         void OnEnable()
