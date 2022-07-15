@@ -5,19 +5,19 @@ namespace RPG.StateMachine
 {
     public class PlayerTurn : State
     {
-        public BattleState stateName = BattleState.PLAYER_TURN;
-        public override IEnumerator Attack(BattleStateManager battleManager, int damage)
+        public override BattleState StateName => BattleState.PLAYER_TURN;
+        public override IEnumerator Execute(BattleStateManager battleManager)
         {
-            battleManager.boss.DoDamage(damage);
+            battleManager.boss.DoDamage(battleManager.attackingHero.heroData.attackPower);
             if (battleManager.boss.currentHealth <= 0)
             {
-                battleManager.ChangeStateTo(battleManager.PlayerWinState);
+                battleManager.SetState(battleManager.PlayerWinState);
                 battleManager.HasPlayerWon(true);
             }
             else
             {
                 yield return new WaitForSeconds(1.5f);
-                battleManager.ChangeStateTo(battleManager.BossTurnState);
+                battleManager.SetState(battleManager.BossTurnState);
                 battleManager.AttackPlayer();
             }
         }

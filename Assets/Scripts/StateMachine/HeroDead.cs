@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RPG.StateMachine
 {
-    public class PlayerDead : State
+    public class HeroDead : State
     {
-        public BattleState stateName = BattleState.HERO_DEAD;
+        public override BattleState StateName => BattleState.HERO_DEAD;
 
-        public override IEnumerator Death(BattleStateManager battleManager)
+        public override IEnumerator Execute(BattleStateManager battleManager)
         {
             battleManager.attackedHero.DisableHero();
             yield return new WaitForSeconds(1.5f);

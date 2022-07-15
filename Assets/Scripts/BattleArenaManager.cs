@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using RPG.StateMachine;
 
-public class BattleArenaManager : StateMachine
+public class BattleArenaManager : MonoBehaviour
 {
     [SerializeField]
     private bool isDebugMode;
@@ -72,6 +72,8 @@ public class BattleArenaManager : StateMachine
     {
         EventManager.IsPointerHeldDown.AddListener(LoadPopupData);
         EventManager.EnableHeroToggles.AddListener(ActivateHeroes);
+        EventManager.PlayerWon.AddListener(HasPlayerWon);
+        EventManager.HeroDead.AddListener(HeroDeath);
         hero1Toggle.onValueChanged.AddListener(AttackBoss);
         hero2Toggle.onValueChanged.AddListener(AttackBoss);
         hero3Toggle.onValueChanged.AddListener(AttackBoss);
@@ -81,6 +83,8 @@ public class BattleArenaManager : StateMachine
     {
         EventManager.IsPointerHeldDown.RemoveListener(LoadPopupData);
         EventManager.EnableHeroToggles.RemoveListener(ActivateHeroes);
+        EventManager.HeroDead.RemoveListener(HeroDeath);
+        EventManager.PlayerWon.RemoveListener(HasPlayerWon);
         hero1Toggle.onValueChanged.RemoveListener(AttackBoss);
         hero2Toggle.onValueChanged.RemoveListener(AttackBoss);
         hero3Toggle.onValueChanged.RemoveListener(AttackBoss);
@@ -109,11 +113,11 @@ public class BattleArenaManager : StateMachine
             }
             stateManager.attackingHero = attackingHero;
             stateManager.AttackBoss();
+            ChooseRandomHeroToAttack();
             foreach (var item in heroControllers)
             {
                 item.heroToggle.isOn = item.heroToggle.interactable = false;
             }
-            stateManager.attackedHero = heroControllers[Random.Range(0, heroControllers.Count)];
         }
         isPointerHeldDown = false;
 
@@ -121,7 +125,6 @@ public class BattleArenaManager : StateMachine
 
     public void HasPlayerWon(bool hasWon)
     {
-        stateManager.HasPlayerWon(hasWon);
         if (hasWon)
         {
             foreach (var item in heroControllers)
@@ -135,14 +138,21 @@ public class BattleArenaManager : StateMachine
         {
             StartCoroutine(popupManager.BattleState(false));
         }
-        HeroUnlockManager.UpdateBattleCount();
+        if(!isDebugMode)
+        {
+            HeroUnlockManager.UpdateBattleCount();
+        }
+    }
+
+    public void ChooseRandomHeroToAttack()
+    {
+        stateManager.attackedHero = attackedHero = heroControllers[Random.Range(0, heroControllers.Count)];
     }
 
     public void HeroDeath()
     {
         if (heroControllers.Count > 0)
         {
-            stateManager.HeroDeath();
             heroControllers.Remove(attackedHero);
         }
 

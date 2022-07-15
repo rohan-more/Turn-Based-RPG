@@ -7,10 +7,7 @@ namespace RPG.StateMachine
     {
         protected State State;
 
-        public void SetState(State state)
-        {
-            State = state;
-        }
+        public abstract void SetState(State state);
 
         public State GetState()
         {

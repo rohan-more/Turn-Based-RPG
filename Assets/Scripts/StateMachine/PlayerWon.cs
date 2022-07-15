@@ -6,9 +6,9 @@ namespace RPG.StateMachine
 {
     public class PlayerWon : State
     {
-        public BattleState stateName = BattleState.WIN;
+        public override BattleState StateName => BattleState.WIN;
 
-        public override IEnumerator Win(BattleStateManager battleManager)
+        public override IEnumerator Execute(BattleStateManager battleManager)
         {
             yield return new WaitForSeconds(1.0f);
         }

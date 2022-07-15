@@ -54,9 +54,9 @@ public static class SaveSystem
     public static void LoadSaveFile(string name)
     {
         string path = SAVE_FOLDER_PATH + name + ".json";
-        if (File.Exists(path) && !GameDataManager.Instance.heroDict.ContainsKey(GetEnumFromString(name)))
+        if (File.Exists(path) && !GameDataManager.Instance.HeroSavedData.ContainsKey(GetEnumFromString(name)))
         {
-            GameDataManager.Instance.heroDict.Add(GetEnumFromString(name), DeserializeHeroData(path));
+            GameDataManager.Instance.HeroSavedData.Add(GetEnumFromString(name), DeserializeHeroData(path));
         }
     }
 

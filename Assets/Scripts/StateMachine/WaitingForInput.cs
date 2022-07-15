@@ -6,8 +6,8 @@ namespace RPG.StateMachine
 {
     public class WaitingForInput : State
     {
-        public BattleState stateName = BattleState.WAITING_INPUT;
-        public override IEnumerator Start()
+        public override BattleState StateName => BattleState.WAITING_INPUT;
+        public override IEnumerator Enter()
         {
             yield return new WaitForSeconds(1.5f);
         }

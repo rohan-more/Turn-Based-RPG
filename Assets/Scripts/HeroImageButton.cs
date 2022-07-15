@@ -17,7 +17,7 @@ public class HeroImageButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         if (!string.IsNullOrEmpty(character.ToString()))
         {
             SaveSystem.LoadSaveFile(character.ToString());
-            GameDataManager.Instance.heroDict.TryGetValue(character, out heroData);
+            GameDataManager.Instance.HeroSavedData.TryGetValue(character, out heroData);
         }
     }
 

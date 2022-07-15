@@ -12,7 +12,7 @@ namespace RPG.StateMachine
         public WaitingForInput WaitingForPlayerInput = new WaitingForInput();
         public PlayerTurn PlayerTurnState = new PlayerTurn();
         public BossTurn BossTurnState = new BossTurn();
-        public PlayerDead PlayerDeadState = new PlayerDead();
+        public HeroDead PlayerDeadState = new HeroDead();
         public PlayerWon PlayerWinState = new PlayerWon();
         public PlayerLost PlayerLoseState = new PlayerLost();
 
@@ -27,25 +27,30 @@ namespace RPG.StateMachine
         public BossController boss;
 
         #region StateMachine Functions
+
+        public override void SetState(State state)
+        {
+            CurrentState = state;
+        }
         /// <summary>
         /// Boss attacks player
         /// </summary>
         /// <param name="value"></param>
         public void AttackPlayer()
         {
-            StartCoroutine(CurrentState.Attack(this, boss.bossData.attackPower));
+            StartCoroutine(CurrentState.Execute(this));
         }
 
         public void AttackBoss()
         {
-            ChangeStateTo(PlayerTurnState);
-            StartCoroutine(CurrentState.Attack(this, attackingHero.saveData.attackPower));
+            SetState(PlayerTurnState);
+            StartCoroutine(CurrentState.Execute(this));
         }
 
         public void AwaitingPlayerInput()
         {
-            ChangeStateTo(WaitingForPlayerInput);
-            StartCoroutine(CurrentState.Start());
+            SetState(WaitingForPlayerInput);
+            StartCoroutine(CurrentState.Enter());
             EventManager.EnableHeroToggles?.Invoke();
         }
 
@@ -59,11 +64,13 @@ namespace RPG.StateMachine
         {
             if (hasWon)
             {
-                StartCoroutine(CurrentState.Win(this));
+                StartCoroutine(CurrentState.Execute(this));
+                EventManager.PlayerWon?.Invoke(true);
             }
             else
             {
-                StartCoroutine(CurrentState.Lose(this));
+                StartCoroutine(CurrentState.Execute(this));
+                EventManager.PlayerWon?.Invoke(false);
             }
         }
 
@@ -74,19 +81,16 @@ namespace RPG.StateMachine
 
         public void HeroDeath()
         {
-            StartCoroutine(CurrentState.Death(this));
+            StartCoroutine(CurrentState.Execute(this));
+            EventManager.HeroDead?.Invoke();
         }
 
         public void SetHeroDeathState()
         {
-            ChangeStateTo(PlayerLoseState);
+            SetState(PlayerLoseState);
             HasPlayerWon(false);
         }
 
-        public void ChangeStateTo(State newState)
-        {
-            CurrentState = newState;
-        }
         #endregion
     }
 }

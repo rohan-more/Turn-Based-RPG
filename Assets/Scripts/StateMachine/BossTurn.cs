@@ -5,13 +5,14 @@ namespace RPG.StateMachine
 {
     public class BossTurn : State
     {
-        public BattleState stateName = BattleState.BOSS_TURN;
-        public override IEnumerator Attack(BattleStateManager battleManager, int damage)
+        public override BattleState StateName => BattleState.BOSS_TURN;
+
+        public override IEnumerator Execute(BattleStateManager battleManager)
         {
-            battleManager.attackedHero.DoDamage(damage);
+            battleManager.attackedHero.DoDamage(battleManager.boss.bossData.attackPower);
             if (battleManager.attackedHero.currentHealth <= 0)
             {
-                battleManager.ChangeStateTo(battleManager.PlayerDeadState);
+                battleManager.SetState(battleManager.PlayerDeadState);
                 battleManager.HeroDeath();
             }
             yield return new WaitForSeconds(1.5f);
