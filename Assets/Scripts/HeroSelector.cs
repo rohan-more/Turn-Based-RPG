@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-namespace RPG_UI
+namespace RPG.UI
 {
     public class HeroSelector : MonoBehaviour
     {

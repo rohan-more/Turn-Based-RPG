@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using RPG;
+using UnityEngine.TextCore.Text;
 public sealed class GameDataManager
 {
     private GameDataManager() { }
@@ -30,5 +32,17 @@ public sealed class GameDataManager
             return heroName;
         }
         return RPG.CharacterData.CharacterName.LAMBERT;
+    }
+
+    public HeroSaveData GetHeroData(RPG.CharacterData.CharacterName name)
+    {
+        HeroSaveData data = null;
+        if (!string.IsNullOrEmpty(name.ToString()))
+        {
+            SaveSystem.LoadSaveFile(name.ToString());
+            GameDataManager.Instance.HeroSavedData.TryGetValue(name, out data);
+        }
+
+        return data;
     }
 }
