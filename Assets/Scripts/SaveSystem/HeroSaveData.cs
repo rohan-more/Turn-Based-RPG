@@ -21,7 +21,7 @@ public class HeroSaveData
     {
         this.heroName = heroData.heroName.ToString();
         this.isUnlocked = heroData.isLocked.ToString();
-        this.isSelected = heroData.isSelected.ToString();
+        //this.isSelected = heroData.isSelected.ToString();
         this.attackPower = heroData.attackPower;
         this.level = heroData.level;
         this.xP = heroData.xP;

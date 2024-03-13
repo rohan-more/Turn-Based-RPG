@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;
 using System.IO;
-
+using System.Xml;
 public static class SaveSystem
 {
     private static readonly string SAVE_FOLDER_PATH = Application.persistentDataPath + "/SaveData/";
@@ -16,7 +15,7 @@ public static class SaveSystem
     {
         using StreamReader r = new StreamReader(path);
         string json = r.ReadToEnd();
-        HeroSaveData heroData = JsonConvert.DeserializeObject<HeroSaveData>(json);
+        HeroSaveData heroData = JsonUtility.FromJson<HeroSaveData>(json);
         return heroData;
     }
 
@@ -33,7 +32,7 @@ public static class SaveSystem
         }
 
         HeroSaveData saveData = new HeroSaveData(heroData);
-        string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
+        string json = JsonUtility.ToJson(saveData,true);
         WriteTextToFile(path, json);
     }
 
@@ -47,7 +46,7 @@ public static class SaveSystem
                 heroData.isLocked = RPG.CharacterData.LockedState.UNLOCKED;
             }
             HeroSaveData saveData = new HeroSaveData(heroData);
-            string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
+            string json = JsonUtility.ToJson(saveData,true);
             WriteTextToFile(path, json);
         }
     }
@@ -79,7 +78,7 @@ public static class SaveSystem
         string path = SAVE_FOLDER_PATH + saveData.heroName + ".json";
         if (File.Exists(path))
         {
-            string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
+            string json = JsonUtility.ToJson(saveData,true);
             File.WriteAllText(path, json);
         }
         else
@@ -95,7 +94,7 @@ public static class SaveSystem
         {
             using StreamReader r = new StreamReader(path);
             string json = r.ReadToEnd();
-            HeroSaveData heroData = JsonConvert.DeserializeObject<HeroSaveData>(json);
+            HeroSaveData heroData = JsonUtility.FromJson<HeroSaveData>(json);
             return heroData;
         }
         else

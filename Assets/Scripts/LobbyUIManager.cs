@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-namespace RPG_UI
+namespace RPG.UI
 {
     public class LobbyUIManager : MonoBehaviour
     {
@@ -63,6 +63,20 @@ namespace RPG_UI
 
         }
 
+        public HeroData GetHeroData(CharacterData.CharacterName name)
+        {
+            return heroDataList.All.Find(x => x.heroName == name);
+        }
+
+        public HeroData GetHeroDataByIndex(int index)
+        {
+            return heroDataList.All[index];
+        }
+        public int GetListCount()
+        {
+            return heroDataList.All.Count;
+        }
+
         private void ExitApplication()
         {
             Application.Quit();
@@ -82,7 +96,7 @@ namespace RPG_UI
             battleButton.onClick.RemoveListener(StartBattle);
         }
 
-        public static void UnlockHero(RPG_UI.HeroSelector item)
+        public static void UnlockHero(RPG.UI.HeroSelector item)
         {
             SaveSystem.LoadHeroSaveFile(item.heroData);
             item.UnlockHero();

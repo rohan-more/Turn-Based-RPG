@@ -47,12 +47,12 @@ public class BattleArenaManager : MonoBehaviour
             heroSaveData.Add(SaveSystem.LoadHeroSaveFile(item.ToString()));
         }
 
-        if (isDebugMode)
+/*        if (isDebugMode)
         {
             GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.LAMBERT);
             GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.ESKEL);
             GameDataManager.Instance.SelectedHeroes.Add(RPG.CharacterData.CharacterName.VESEMIR);
-        }
+        }*/
 
         for (int i = 0; i < heroSaveData.Count; i++)
         {

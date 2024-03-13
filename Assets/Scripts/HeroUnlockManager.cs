@@ -31,7 +31,7 @@ public static class HeroUnlockManager
         return totalBattleCount;
     }
 
-    public static void CheckHeroStatus(RPG_UI.HeroSelector item)
+    public static void CheckHeroStatus(RPG.UI.HeroSelector item)
     {
         HeroSaveData heroData = SaveSystem.LoadHeroSaveFile(item.heroData.heroName.ToString());
         if (heroData.isUnlocked == RPG.CharacterData.LockedState.LOCKED.ToString())

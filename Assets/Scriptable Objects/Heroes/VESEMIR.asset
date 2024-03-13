@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroName: 1
   isLocked: 0
-  isSelected: 0
+  isSelected: 1
   maxHealth: 200
   attackPower: 20
   level: 1
