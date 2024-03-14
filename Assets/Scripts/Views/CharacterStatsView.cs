@@ -15,6 +15,11 @@ namespace RPG.UI
         [SerializeField] private TMPro.TMP_Text xpText;
         [SerializeField] private TMPro.TMP_Text healthText;
 
+        private const string ATTACK = "Attack: ";
+        private const string LEVEL = "Level: ";
+        private const string XP = "XP: ";
+        private const string HEALTH = "Health: ";
+        private const string HIDDEN = "??";
         public void PopulateData(RPG.CharacterData.CharacterName name)
         {
             character = name;
@@ -24,10 +29,18 @@ namespace RPG.UI
                 GameDataManager.Instance.HeroSavedData.TryGetValue(character, out heroData);
             }
 
-            attackText.text = "Attack: " + heroData.attackPower.ToString();
-            levelText.text = "Level: " + heroData.level.ToString();
-            xpText.text = "XP: " + heroData.xP.ToString();
-            healthText.text = "Health: " + heroData.health.ToString();
+            if (heroData.isUnlocked == CharacterData.LockedState.LOCKED.ToString())
+            {
+                attackText.text = ATTACK + HIDDEN;
+                levelText.text = LEVEL + HIDDEN;
+                xpText.text = XP + HIDDEN;
+                healthText.text = HEALTH + HIDDEN;
+                return;
+            }
+            attackText.text = ATTACK + heroData.attackPower;
+            levelText.text = LEVEL + heroData.level;
+            xpText.text = XP + heroData.xP;
+            healthText.text = HEALTH + heroData.health;
 
         }
 

@@ -36,23 +36,15 @@ namespace RPG.UI
         {
             heroToggle.onValueChanged.RemoveListener(ToggleHero);
         }
-
+        
         public void SetCharacterData(HeroData data)
         {
             heroData = data;
             profileImage.sprite = data.heroSprite;
             lockedText.text = data.heroName.ToString();
 
-            if(heroData.isSelected == CharacterData.SelectedState.UNSELECTED ) 
-            {
-                selectedIcon.gameObject.SetActive(false);
-            }
-            else
-            {
-                selectedIcon.gameObject.SetActive(true);
-            }
-
-            //heroData.isSelected = CharacterData.SelectedState.SELECTED;
+            selectedIcon.gameObject.SetActive(heroData.isSelected != CharacterData.SelectedState.UNSELECTED);
+            
             if (heroData.isLocked == CharacterData.LockedState.LOCKED)
             {
                 LockHero();
@@ -63,13 +55,14 @@ namespace RPG.UI
             }
         }
 
-        public void LockHero()
+        private void LockHero()
         {
             LOCKEDSTATE = RPG.CharacterData.LockedState.LOCKED;
             heroToggle.interactable = false;
             lockedIcon.gameObject.SetActive(true);
         }
-        public void UnlockHero()
+
+        private void UnlockHero()
         {
             LOCKEDSTATE = RPG.CharacterData.LockedState.UNLOCKED;
             heroToggle.interactable = true;
@@ -79,20 +72,14 @@ namespace RPG.UI
         public void ToggleSelect(bool value)
         {
             selectedIcon.gameObject.SetActive(value);
-            if(value) 
-            {
-                heroData.isSelected = CharacterData.SelectedState.SELECTED;
-            }
-            else
-            {
-                heroData.isSelected = CharacterData.SelectedState.UNSELECTED;
-            }
+
+            heroData.isSelected = value ? CharacterData.SelectedState.SELECTED : CharacterData.SelectedState.UNSELECTED;
 
             AddToParty(value);
         }
 
 
-        public void AddToParty(bool isSelected)
+        private void AddToParty(bool isSelected)
         {
             if (isSelected)
             {
@@ -107,7 +94,6 @@ namespace RPG.UI
                 RPG.BattleManager.RemoveFromHeroList(heroData.heroName);
                 heroToggle.image.color = Color.white;
             }
-
             if (RPG.BattleManager.GetHeroCount() == RPG.BattleManager.HERO_COUNT)
             {
                 EventManager.EnableBattle?.Invoke(true);
@@ -118,7 +104,7 @@ namespace RPG.UI
             }
         }
 
-        public void ToggleHero(bool isSelected)
+        private void ToggleHero(bool isSelected)
         {
             if (isSelected)
             {
@@ -132,15 +118,6 @@ namespace RPG.UI
             {
                 RPG.BattleManager.RemoveFromHeroList(heroData.heroName);
                 heroToggle.image.color = Color.white;
-            }
-
-            if (RPG.BattleManager.GetHeroCount() == RPG.BattleManager.HERO_COUNT)
-            {
-                EventManager.EnableBattle?.Invoke(true);
-            }
-            else if (RPG.BattleManager.GetHeroCount() < RPG.BattleManager.HERO_COUNT)
-            {
-                EventManager.EnableBattle?.Invoke(false);
             }
         }
     }

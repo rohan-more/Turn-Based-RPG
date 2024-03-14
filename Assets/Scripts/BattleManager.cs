@@ -6,7 +6,7 @@ namespace RPG
 {
     public static class BattleManager
     {
-        public const float HERO_COUNT = 3;
+        public const int HERO_COUNT = 3;
         private static List<RPG.CharacterData.CharacterName> HeroList = new List<RPG.CharacterData.CharacterName>();
 
         #region Helper Functions

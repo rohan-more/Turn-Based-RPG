@@ -23,6 +23,7 @@ namespace RPG.UI
             foreach (var item in heroDataList.All)
             {
                 SaveSystem.CreateSaveFile(item);
+                item.isSelected = CharacterData.SelectedState.UNSELECTED;
             }
         }
 
@@ -46,21 +47,19 @@ namespace RPG.UI
                     }
                 }
             }
-
         }
 
         private void CreateHeroToggles()
         {
-            for (int i = 0; i < heroDataList.All.Count; i++)
+            foreach (var t in heroDataList.All)
             {
                 GameObject heroTogglePrefab = Instantiate(heroPrefab, heroesParent);
 
                 HeroSelector hero = heroTogglePrefab.GetComponent<HeroSelector>();
-                hero.heroData = heroDataList.All[i];
+                hero.heroData = t;
                 heroTogglePrefab.transform.name = hero.heroData.name;
                 heroUIList.Add(hero);
             }
-
         }
 
         public HeroData GetHeroData(CharacterData.CharacterName name)
@@ -96,7 +95,7 @@ namespace RPG.UI
             battleButton.onClick.RemoveListener(StartBattle);
         }
 
-        public static void UnlockHero(RPG.UI.HeroSelector item)
+        private static void UnlockHero(RPG.UI.HeroSelector item)
         {
             SaveSystem.LoadHeroSaveFile(item.heroData);
             item.UnlockHero();
@@ -114,7 +113,7 @@ namespace RPG.UI
             }
         }
 
-        public void StartBattle()
+        private void StartBattle()
         {
             this.gameObject.SetActive(false);
             GameDataManager.Instance.SelectedHeroes = RPG.BattleManager.GetHeroList();

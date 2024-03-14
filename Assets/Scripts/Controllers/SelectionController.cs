@@ -23,6 +23,7 @@ namespace RPG.Controllers
         [SerializeField] private int leftIndex;
         [SerializeField] private int centerIndex;
         [SerializeField] private int rightIndex;
+        private bool isSelected;
         void Start()
         {
              leftIndex = 0;
@@ -50,10 +51,22 @@ namespace RPG.Controllers
         private void SelectCharacter()
         {
             centerCharacter.ToggleSelect(true);
+            selectBtn.gameObject.SetActive(false);
+            unselectBtn.gameObject.SetActive(true);
+            if (RPG.BattleManager.GetHeroCount() == RPG.BattleManager.HERO_COUNT)
+            {
+                EventManager.EnableBattle?.Invoke(true);
+            }
+            else if (RPG.BattleManager.GetHeroCount() < RPG.BattleManager.HERO_COUNT)
+            {
+                EventManager.EnableBattle?.Invoke(false);
+            }
         }
 
         private void UnselectCharacter()
         {
+            selectBtn.gameObject.SetActive(true);
+            unselectBtn.gameObject.SetActive(false);
             centerCharacter.ToggleSelect(false);
         }
 
@@ -101,6 +114,12 @@ namespace RPG.Controllers
             else
             {
                 selectBtn.gameObject.SetActive(true);
+                unselectBtn.gameObject.SetActive(false);
+            }
+
+            if (centerCharacter.heroData.isLocked == CharacterData.LockedState.LOCKED)
+            {
+                selectBtn.gameObject.SetActive(false);
                 unselectBtn.gameObject.SetActive(false);
             }
         }
