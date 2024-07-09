@@ -10,6 +10,8 @@ namespace RPG_UI
         [SerializeField]
         private Toggle heroToggle;
         [SerializeField]
+        private Image heroImage;
+        [SerializeField]
         private HeroImageButton heroButton;
         [SerializeField]
         private TMPro.TMP_Text lockedText;
@@ -26,7 +28,7 @@ namespace RPG_UI
         {
             if(heroData != null)
             {
-                heroToggle.image.sprite = heroData.heroSprite;
+                heroImage.sprite = heroData.heroSprite;
                 lockedText.text = heroData.heroName.ToString();
                 heroButton.GetHeroData(heroData.heroName);
             }
